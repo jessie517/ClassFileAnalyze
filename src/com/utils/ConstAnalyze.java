@@ -8,7 +8,7 @@ import java.util.Map;
 /**
  * Created by chenjiaxu on 2017/10/23.
  */
-public class ConstType {
+public class ConstAnalyze {
     private static final int CONSTANT_Utf8_info = 1;
     private static final int CONSTANT_Integer_info = 3;
     private static final int CONSTANT_Float_info = 4;

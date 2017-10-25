@@ -1,6 +1,6 @@
 package com.classAnalyze;
 
-import com.utils.ConstType;
+import com.utils.ConstAnalyze;
 import com.utils.UToNumeric;
 
 import java.io.*;
@@ -35,11 +35,11 @@ public class ClassAnalyze {
         System.out.println("常量池长度：" + constL);
 
         Object[] consts = new Object[constL];
-        ConstType constType = new ConstType();
+        ConstAnalyze constAnalyze = new ConstAnalyze();
         for(int i = 1; i < constL; i++){
             in.read(u1);
             int type = UToNumeric.u1ToInt(u1);
-            i = constType.setConst(i, type, in, consts);
+            i = constAnalyze.setConst(i, type, in, consts);
         }
         System.out.println(Arrays.toString(consts));
         in.close();
