@@ -1,4 +1,4 @@
-import com.classAnalyze.ClassAnalyze;
+import com.analyze.ClassAnalyze;
 
 import java.io.IOException;
 
@@ -10,7 +10,7 @@ public class ProjectRun {
         ClassAnalyze classAnalyze = new ClassAnalyze();
         try {
             classAnalyze.analyze("C:\\Users\\chenjiaxu\\Desktop\\QueryService.class");
-        } catch (IOException e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }

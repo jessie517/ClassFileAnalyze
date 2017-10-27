@@ -1,9 +1,10 @@
-package com.utils;
+package com.analyze.constant;
+
+import com.analyze.constant.bean.ConstBean;
+import com.utils.UToNumeric;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.HashMap;
-import java.util.Map;
 
 /**
  * Created by chenjiaxu on 2017/10/23.
@@ -20,13 +21,24 @@ public class ConstAnalyze {
     private static final int CONSTANT_Methodref_info = 10;
     private static final int CONSTANT_InterfaceMethodref_info = 11;
     private static final int CONSTANT_NameAndType_info = 12;
+    private byte[] u1 = new byte[1];
     private byte[] u2 = new byte[2];
     private byte[] u4 = new byte[4];
     private byte[] u8 = new byte[8];
 
-    public int setConst(int i, int type, InputStream in, Object[] consts) throws IOException {
-        Map<String, Object> constMap = new HashMap<String, Object>();
-        constMap.put("type", type);
+    public ConstBean[] getConstBeans(int constCount, InputStream in) throws Exception {
+        ConstBean[] constBeans = new ConstBean[constCount];
+        for(int i = 1; i < constCount; i++){
+            in.read(u1);
+            int type = UToNumeric.u1ToInt(u1);
+            i = this.setConst(i, type, in, constBeans);
+        }
+        return constBeans;
+    }
+
+    private int setConst(int i, int type, InputStream in, Object[] consts) throws Exception {
+        ConstBean constBean = new ConstBean();
+        constBean.setType(type);
         Object value = null;
         int newI = i;
         switch (type) {
@@ -83,8 +95,8 @@ public class ConstAnalyze {
             }
         }
 
-        constMap.put("value", value);
-        consts[i] = constMap;
+        constBean.setValue(value);
+        consts[i] = constBean;
         return newI;
     }
 
