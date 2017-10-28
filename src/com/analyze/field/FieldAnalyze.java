@@ -17,7 +17,7 @@ public class FieldAnalyze {
     public FieldBean[] getFieldBeans(int fieldCount, InputStream in) throws Exception {
         FieldBean[] constBeans = new FieldBean[fieldCount];
         AttributeAnalyze attributeAnalyze = new AttributeAnalyze();
-        for (int i = 1; i < fieldCount; i++) {
+        for (int i = 0; i < fieldCount; i++) {
             FieldBean fieldBean = new FieldBean();
             in.read(u2);
             fieldBean.setFieldAccessBean(FieldAccessFlagAnalyze.getAccessBean(u2));
@@ -28,6 +28,7 @@ public class FieldAnalyze {
             in.read(u2);
             int attributeCount = UToNumeric.u2ToInt(u2);
             fieldBean.setAttributeInfoBeans(attributeAnalyze.getAttributeInfoBeans(attributeCount, in));
+            constBeans[i] = fieldBean;
         }
         return constBeans;
     }

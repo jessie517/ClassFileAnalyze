@@ -61,7 +61,7 @@ public class ClassAnalyze {
         }
 
         in.read(u2);
-        int fieldCount = UToNumeric.u1ToInt(u2);
+        int fieldCount = UToNumeric.u2ToInt(u2);
         FieldBean[] fieldBeans = new FieldAnalyze().getFieldBeans(fieldCount, in);
 
         in.close();
