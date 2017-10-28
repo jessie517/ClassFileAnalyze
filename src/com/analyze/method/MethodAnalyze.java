@@ -2,6 +2,7 @@ package com.analyze.method;
 
 import com.analyze.basic.accessFlag.MethodAccessFlagAnalyze;
 import com.analyze.attribute.AttributeAnalyze;
+import com.analyze.constant.bean.ConstBean;
 import com.analyze.method.bean.MethodBean;
 import com.utils.UToNumeric;
 
@@ -15,7 +16,7 @@ public class MethodAnalyze {
     private byte[] u1 = new byte[1];
     private byte[] u2 = new byte[2];
 
-    public MethodBean[] getMethodBeans(InputStream in) throws Exception {
+    public MethodBean[] getMethodBeans(InputStream in, ConstBean[] constBeans) throws Exception {
         // 方法表长度
         in.read(u2);
         int methodCount = UToNumeric.u2ToInt(u2);
@@ -34,7 +35,7 @@ public class MethodAnalyze {
             in.read(u2);
             methodBean.setDescriptorInde(UToNumeric.u2ToInt(u2));
 
-            methodBean.setAttributeInfoBeans(attributeAnalyze.getAttributeInfoBeans(in));
+            methodBean.setAttributeInfoBeans(attributeAnalyze.getAttributeInfoBeans(in,constBeans));
 
             methodBeans[i] = methodBean;
         }

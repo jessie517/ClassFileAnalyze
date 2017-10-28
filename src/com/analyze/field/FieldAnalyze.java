@@ -2,6 +2,7 @@ package com.analyze.field;
 
 import com.analyze.basic.accessFlag.FieldAccessFlagAnalyze;
 import com.analyze.attribute.AttributeAnalyze;
+import com.analyze.constant.bean.ConstBean;
 import com.analyze.field.bean.FieldBean;
 import com.utils.UToNumeric;
 
@@ -14,12 +15,12 @@ public class FieldAnalyze {
     private byte[] u1 = new byte[1];
     private byte[] u2 = new byte[2];
 
-    public FieldBean[] getFieldBeans(InputStream in) throws Exception {
+    public FieldBean[] getFieldBeans(InputStream in, ConstBean[] constBeans) throws Exception {
         // 字段表长度
         in.read(u2);
         int fieldCount = UToNumeric.u2ToInt(u2);
 
-        FieldBean[] constBeans = new FieldBean[fieldCount];
+        FieldBean[] fieldBeans = new FieldBean[fieldCount];
         AttributeAnalyze attributeAnalyze = new AttributeAnalyze();
         for (int i = 0; i < fieldCount; i++) {
             FieldBean fieldBean = new FieldBean();
@@ -33,11 +34,11 @@ public class FieldAnalyze {
             in.read(u2);
             fieldBean.setDescriptorInde(UToNumeric.u2ToInt(u2));
 
-            fieldBean.setAttributeInfoBeans(attributeAnalyze.getAttributeInfoBeans(in));
+            fieldBean.setAttributeInfoBeans(attributeAnalyze.getAttributeInfoBeans(in, constBeans));
 
-            constBeans[i] = fieldBean;
+            fieldBeans[i] = fieldBean;
         }
-        return constBeans;
+        return fieldBeans;
     }
 
 }

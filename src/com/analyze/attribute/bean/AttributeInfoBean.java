@@ -37,26 +37,28 @@ public class AttributeInfoBean {
         this.attributeInfoBean = attributeInfoBean;
     }
 
-    public void generateAttributeInfoBean(ConstBean[] constBeans) {
+    public void generateAttributeInfoBean(ConstBean[] constBeans) throws Exception {
         Object attributeName = constBeans[attributeNameIndex].getValue();
-        if ("CODE".equals(attributeName)) {
-            this.setAttributeInfoBean(new CodeAttributeBean(infoBytes));
-        } else if ("EXCEPTION".equals(attributeName)) {
+        if ("Code".equals(attributeName)) {
+            this.setAttributeInfoBean(new CodeAttributeBean(infoBytes, constBeans));
+        } else if ("Exceptions".equals(attributeName)) {
             this.setAttributeInfoBean(new ExceptionAttributeBean(infoBytes));
-        } else if ("LINENUMBERTABLE".equals(attributeName)) {
+        } else if ("LineNumberTable".equals(attributeName)) {
             this.setAttributeInfoBean(new LineNumberTableAttributeBean(infoBytes));
-        } else if ("LOCALVARIABLETABLE".equals(attributeName)) {
+        } else if ("LocalVariableTable".equals(attributeName)) {
             this.setAttributeInfoBean(new LocalVariableTableAttributeBean(infoBytes));
-        } else if ("SOURCEFILE".equals(attributeName)) {
+        } else if ("SourceFile".equals(attributeName)) {
             this.setAttributeInfoBean(new SourceFileAttributeBean(infoBytes));
-        } else if ("CONSTANTVALUE".equals(attributeName)) {
+        } else if ("ConstantValue".equals(attributeName)) {
             this.setAttributeInfoBean(new ConstantValueAttributeBean(infoBytes));
-        } else if ("INNERCLASSES".equals(attributeName)) {
+        } else if ("InnerClasses".equals(attributeName)) {
             this.setAttributeInfoBean(new InnerClassesAttributeBean(infoBytes));
-        } else if ("DEPRECATED".equals(attributeName)) {
+        } else if ("Deprecated".equals(attributeName)) {
             this.setAttributeInfoBean(new DeprecatedAttributeBean(infoBytes));
-        } else if ("SYNTHETIC".equals(attributeName)) {
+        } else if ("Synthetic".equals(attributeName)) {
             this.setAttributeInfoBean(new SyntheticAttributeBean(infoBytes));
+        } else {
+            System.out.println(attributeName);
         }
     }
 

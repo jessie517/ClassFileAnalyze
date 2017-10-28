@@ -1,6 +1,7 @@
 package com.analyze.attribute;
 
 import com.analyze.attribute.bean.AttributeInfoBean;
+import com.analyze.constant.bean.ConstBean;
 import com.utils.UToNumeric;
 
 import java.io.InputStream;
@@ -12,7 +13,7 @@ public class AttributeAnalyze {
     private byte[] u2 = new byte[2];
     private byte[] u4 = new byte[4];
 
-    public AttributeInfoBean[] getAttributeInfoBeans(InputStream in) throws Exception {
+    public AttributeInfoBean[] getAttributeInfoBeans(InputStream in, ConstBean[] constBeans) throws Exception {
         in.read(u2);
         int attributeCount = UToNumeric.u2ToInt(u2);
 
@@ -25,7 +26,7 @@ public class AttributeAnalyze {
             byte[] infoBytes = new byte[UToNumeric.u4ToInt(u4)];
             in.read(infoBytes);
             attributeInfoBean.setInfoBytes(infoBytes);
-
+            attributeInfoBean.generateAttributeInfoBean(constBeans);
             attributeInfoBeans[i] = attributeInfoBean;
         }
         return attributeInfoBeans;

@@ -31,7 +31,7 @@ public class ClassAnalyze {
 
         //魔数
         in.read(u4);
-        if(!isJavaClass(u4)){
+        if (!isJavaClass(u4)) {
             System.out.println("class文件魔数校验失败");
         }
 
@@ -43,27 +43,27 @@ public class ClassAnalyze {
 
         ClassBasicMsg classBasicMsg = new ClassBasicMsgAnalyze().getClassBasicMsg(in);
 
-        FieldBean[] fieldBeans = new FieldAnalyze().getFieldBeans(in);
+        FieldBean[] fieldBeans = new FieldAnalyze().getFieldBeans(in, consts);
 
-        MethodBean[] methodBeans = new MethodAnalyze().getMethodBeans(in);
+        MethodBean[] methodBeans = new MethodAnalyze().getMethodBeans(in, consts);
 
-        AttributeInfoBean[] classAttributes = new AttributeAnalyze().getAttributeInfoBeans(in);
+        AttributeInfoBean[] classAttributes = new AttributeAnalyze().getAttributeInfoBeans(in, consts);
 
         System.out.println("class文件流中尚未解析字节数：" + in.available());
         in.close();
     }
 
-    private boolean isJavaClass(byte[] b){
+    private boolean isJavaClass(byte[] b) {
         BigInteger bigInteger = new BigInteger(1, b);
         String hexString = bigInteger.toString(16);
         //0xCAFEBABE
         return hexString.equalsIgnoreCase("CAFEBABE");
     }
 
-    private double getVersion(byte[] b){
-         int minor =  (b[1] & 0xFF) | (b[0] & 0xFF) << 8;
-         int major = b[3] & 0xFF | (b[2] & 0xFF) << 8;
-         return Double.parseDouble(major+"."+minor);
+    private double getVersion(byte[] b) {
+        int minor = (b[1] & 0xFF) | (b[0] & 0xFF) << 8;
+        int major = b[3] & 0xFF | (b[2] & 0xFF) << 8;
+        return Double.parseDouble(major + "." + minor);
     }
 
 }
