@@ -8,7 +8,7 @@ public class LocalVariableTableAttributeBean extends AttributeInfoBean {
     private LocalVariableInfo[] localVariableTable;
 
     public LocalVariableTableAttributeBean(byte[] infoBytes) {
-        int localVariableTableLength = infoBytes[0] << 8 | infoBytes[1];
+        int localVariableTableLength = (infoBytes[0] & 0xFF) << 8 | (infoBytes[1] & 0xFF);
         this.localVariableTable = getLocalVariableTable(infoBytes, localVariableTableLength, 2);
     }
 
@@ -16,11 +16,11 @@ public class LocalVariableTableAttributeBean extends AttributeInfoBean {
         LocalVariableInfo[] localVariableTable = new LocalVariableInfo[tableLegth];
         for (int i = 0; i < tableLegth; i++) {
             LocalVariableInfo localVariableInfo = new LocalVariableInfo();
-            localVariableInfo.setStartPc(infoBytes[currentIndex++] << 8 | infoBytes[currentIndex++]);
-            localVariableInfo.setLength(infoBytes[currentIndex++] << 8 | infoBytes[currentIndex++]);
-            localVariableInfo.setNameIndex(infoBytes[currentIndex++] << 8 | infoBytes[currentIndex++]);
-            localVariableInfo.setDescriptorIndex(infoBytes[currentIndex++] << 8 | infoBytes[currentIndex++]);
-            localVariableInfo.setIndex(infoBytes[currentIndex++] << 8 | infoBytes[currentIndex++]);
+            localVariableInfo.setStartPc((infoBytes[currentIndex++] & 0xFF) << 8 | (infoBytes[currentIndex++] & 0xFF) );
+            localVariableInfo.setLength((infoBytes[currentIndex++] & 0xFF) << 8 | (infoBytes[currentIndex++] & 0xFF) );
+            localVariableInfo.setNameIndex((infoBytes[currentIndex++] & 0xFF) << 8 | (infoBytes[currentIndex++] & 0xFF) );
+            localVariableInfo.setDescriptorIndex((infoBytes[currentIndex++] & 0xFF) << 8 | (infoBytes[currentIndex++] & 0xFF) );
+            localVariableInfo.setIndex((infoBytes[currentIndex++] & 0xFF) << 8 | (infoBytes[currentIndex++] & 0xFF) );
 
             localVariableTable[i] = localVariableInfo;
         }

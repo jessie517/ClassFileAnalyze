@@ -19,14 +19,14 @@ public class CodeAttributeBean extends AttributeInfoBean {
 
     public CodeAttributeBean(byte[] infoBytes, ConstBean[] constBeans) throws Exception {
         int i = 0;
-        this.maxStack = infoBytes[i++] << 8 | infoBytes[i++];
-        this.maxLocals = infoBytes[i++] << 8 | infoBytes[i++];
+        this.maxStack = (infoBytes[i++] & 0xFF) << 8 | (infoBytes[i++] & 0xFF);
+        this.maxLocals = (infoBytes[i++] & 0xFF) << 8 | (infoBytes[i++] & 0xFF);
 
         //TODO
-        int codeLength = infoBytes[i++] << 24 | infoBytes[i++] << 16 | infoBytes[i++] << 8 | infoBytes[i++];
+        int codeLength = (infoBytes[i++] & 0xFF) << 24 | (infoBytes[i++] & 0xFF) << 16 | (infoBytes[i++] & 0xFF) << 8 | (infoBytes[i++] & 0xFF);
         this.code = Arrays.copyOfRange(infoBytes, i, (i = i + codeLength));
 
-        int exceptionTableLength = infoBytes[i++] << 8 | infoBytes[i++];
+        int exceptionTableLength = (infoBytes[i++] & 0xFF) << 8 | (infoBytes[i++] & 0xFF);
         byte[] exceptionTableBytes = Arrays.copyOfRange(infoBytes, i, (i = i + exceptionTableLength * EXCEPTION_INFO_BYTE_LENGTH));
         this.exceptionTable = getExceptionTable(exceptionTableBytes);
 
@@ -79,10 +79,10 @@ public class CodeAttributeBean extends AttributeInfoBean {
         ExceptionInfoBean[] exceptionInfoBeanTable = new ExceptionInfoBean[exceptionTableLength];
         for (int i = 0; i < exceptionTableLength; i++) {
             ExceptionInfoBean exceptionInfoBean = new ExceptionInfoBean();
-            exceptionInfoBean.setStartPc(exceptionTableBytes[i * EXCEPTION_INFO_BYTE_LENGTH] << 8 | exceptionTableBytes[i * EXCEPTION_INFO_BYTE_LENGTH] + 1);
-            exceptionInfoBean.setEndPc(exceptionTableBytes[i * EXCEPTION_INFO_BYTE_LENGTH + 2] << 8 | exceptionTableBytes[i * EXCEPTION_INFO_BYTE_LENGTH] + 3);
-            exceptionInfoBean.setHandlerPc(exceptionTableBytes[i * EXCEPTION_INFO_BYTE_LENGTH + 4] << 8 | exceptionTableBytes[i * EXCEPTION_INFO_BYTE_LENGTH] + 5);
-            exceptionInfoBean.setCatchType(exceptionTableBytes[i * EXCEPTION_INFO_BYTE_LENGTH + 6] << 8 | exceptionTableBytes[i * EXCEPTION_INFO_BYTE_LENGTH] + 7);
+            exceptionInfoBean.setStartPc((exceptionTableBytes[i * EXCEPTION_INFO_BYTE_LENGTH] & 0xFF) << 8 | (exceptionTableBytes[i * EXCEPTION_INFO_BYTE_LENGTH + 1] & 0xFF) );
+            exceptionInfoBean.setEndPc((exceptionTableBytes[i * EXCEPTION_INFO_BYTE_LENGTH + 2] & 0xFF)  << 8 | (exceptionTableBytes[i * EXCEPTION_INFO_BYTE_LENGTH + 3] & 0xFF) );
+            exceptionInfoBean.setHandlerPc((exceptionTableBytes[i * EXCEPTION_INFO_BYTE_LENGTH + 4] & 0xFF)  << 8 | (exceptionTableBytes[i * EXCEPTION_INFO_BYTE_LENGTH + 5] & 0xFF) );
+            exceptionInfoBean.setCatchType((exceptionTableBytes[i * EXCEPTION_INFO_BYTE_LENGTH + 6] & 0xFF)  << 8 | (exceptionTableBytes[i * EXCEPTION_INFO_BYTE_LENGTH + 7] & 0xFF) );
             exceptionInfoBeanTable[i] = exceptionInfoBean;
         }
         return exceptionInfoBeanTable;

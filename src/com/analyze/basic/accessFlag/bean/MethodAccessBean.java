@@ -33,7 +33,7 @@ public class MethodAccessBean {
     private boolean isSynthtic;
 
     public MethodAccessBean(byte[] b) {
-        int accessFlag = b[0] << 8 | b[1];
+        int accessFlag = (b[0] & 0xFF) << 8 | (b[1] & 0xFF);
         if ((accessFlag & ACC_PUBLIC) == ACC_PUBLIC) {
             this.isPublic = true;
         }

@@ -7,6 +7,6 @@ public class ConstantValueAttributeBean extends AttributeInfoBean {
     private int constantValueIndex;
 
     public ConstantValueAttributeBean(byte[] infoBytes) {
-        this.constantValueIndex = infoBytes[0] << 8 | infoBytes[1];
+        this.constantValueIndex = (infoBytes[0] & 0xFF) << 8 | (infoBytes[1] & 0xFF);
     }
 }

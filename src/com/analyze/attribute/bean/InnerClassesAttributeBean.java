@@ -9,7 +9,7 @@ public class InnerClassesAttributeBean extends AttributeInfoBean {
     private InnerClassesInfo[] innerClassesInfoTable;
 
     public InnerClassesAttributeBean(byte[] infoBytes) {
-        int tableLength = infoBytes[0] << 8 | infoBytes[1];
+        int tableLength = (infoBytes[0] & 0xFF) << 8 | (infoBytes[1] & 0xFF);
         getInnerClassesInfoTable(infoBytes, tableLength, 2);
     }
 
@@ -17,10 +17,10 @@ public class InnerClassesAttributeBean extends AttributeInfoBean {
         InnerClassesInfo[] innerClassesInfoTable = new InnerClassesInfo[tableLegth];
         for (int i = 0; i < tableLegth; i++) {
             InnerClassesInfo innerClassesInfo = new InnerClassesInfo();
-            innerClassesInfo.setInnerClassInfoIndex(infoBytes[currentIndex++] << 8 | infoBytes[currentIndex++]);
-            innerClassesInfo.setOuterClassInfoIndex(infoBytes[currentIndex++] << 8 | infoBytes[currentIndex++]);
-            innerClassesInfo.setInnerNameIndex(infoBytes[currentIndex++] << 8 | infoBytes[currentIndex++]);
-            innerClassesInfo.setInnerClassAccessBean(new InnerClassAccessBean(infoBytes[currentIndex++] << 8 | infoBytes[currentIndex++]));
+            innerClassesInfo.setInnerClassInfoIndex((infoBytes[currentIndex++] & 0xFF)  << 8 | (infoBytes[currentIndex++] & 0xFF) );
+            innerClassesInfo.setOuterClassInfoIndex((infoBytes[currentIndex++] & 0xFF)  << 8 | (infoBytes[currentIndex++] & 0xFF) );
+            innerClassesInfo.setInnerNameIndex((infoBytes[currentIndex++] & 0xFF)  << 8 | (infoBytes[currentIndex++] & 0xFF) );
+            innerClassesInfo.setInnerClassAccessBean(new InnerClassAccessBean((infoBytes[currentIndex++] & 0xFF)  << 8 | (infoBytes[currentIndex++] & 0xFF) ));
 
             innerClassesInfoTable[i] = innerClassesInfo;
         }

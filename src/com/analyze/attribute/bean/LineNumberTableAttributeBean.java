@@ -10,7 +10,7 @@ public class LineNumberTableAttributeBean extends AttributeInfoBean {
 
     public LineNumberTableAttributeBean(byte[] infoBytes) {
         int i = 0;
-        int lineNumberTableLength = infoBytes[i++] << 8 | infoBytes[i++];
+        int lineNumberTableLength = (infoBytes[i++] & 0xFF) << 8 | (infoBytes[i++] & 0xFF);
         this.lineNumberInfoTable = getLineNumberInfoTable(infoBytes, lineNumberTableLength, i);
     }
 
@@ -18,8 +18,8 @@ public class LineNumberTableAttributeBean extends AttributeInfoBean {
         LineNumberInfo[] lineNumberInfoTable = new LineNumberInfo[tableLegth];
         for (int i = 0; i < tableLegth; i++) {
             LineNumberInfo lineNumberInfo = new LineNumberInfo();
-            lineNumberInfo.setStartPc(infoBytes[currentIndex++] << 8 | infoBytes[currentIndex++]);
-            lineNumberInfo.setLineNumber(infoBytes[currentIndex++] << 8 | infoBytes[currentIndex++]);
+            lineNumberInfo.setStartPc((infoBytes[currentIndex++] & 0xFF) << 8 | (infoBytes[currentIndex++] & 0xFF));
+            lineNumberInfo.setLineNumber((infoBytes[currentIndex++] & 0xFF) << 8 | (infoBytes[currentIndex++] & 0xFF));
             lineNumberInfoTable[i] = lineNumberInfo;
         }
         return lineNumberInfoTable;

@@ -63,7 +63,7 @@ public class InnerClassAccessBean {
     }
 
     public InnerClassAccessBean(byte[] b) {
-        this(b[0] << 8 | b[1]);
+        this((b[0] & 0xFF) << 8 | (b[1] & 0xFF));
     }
 
     public boolean isPublic() {

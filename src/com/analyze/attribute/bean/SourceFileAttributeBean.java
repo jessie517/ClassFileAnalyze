@@ -7,7 +7,7 @@ public class SourceFileAttributeBean extends AttributeInfoBean {
     private int sourceFileIndex;
 
     public SourceFileAttributeBean(byte[] infoBytes) {
-        this.sourceFileIndex = infoBytes[0] << 8 | infoBytes[1];
+        this.sourceFileIndex = (infoBytes[0] & 0xFF) << 8 | (infoBytes[1] & 0xFF);
     }
 
     public int getSourceFileIndex() {
