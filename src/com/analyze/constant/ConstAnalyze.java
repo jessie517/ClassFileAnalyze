@@ -26,13 +26,18 @@ public class ConstAnalyze {
     private byte[] u4 = new byte[4];
     private byte[] u8 = new byte[8];
 
-    public ConstBean[] getConstBeans(int constCount, InputStream in) throws Exception {
+    public ConstBean[] getConstBeans(InputStream in) throws Exception {
+        //常量池长度
+        in.read(u2);
+        int constCount = UToNumeric.u2ToInt(u2);
+
         ConstBean[] constBeans = new ConstBean[constCount];
         for(int i = 1; i < constCount; i++){
             in.read(u1);
             int type = UToNumeric.u1ToInt(u1);
             i = this.setConst(i, type, in, constBeans);
         }
+
         return constBeans;
     }
 

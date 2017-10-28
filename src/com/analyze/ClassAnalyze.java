@@ -1,11 +1,17 @@
 package com.analyze;
 
-import com.analyze.accessFlag.ClassAccessFlagAnalyze;
-import com.analyze.accessFlag.bean.ClassAccessBean;
+import com.analyze.attribute.AttributeAnalyze;
+import com.analyze.attribute.bean.AttributeInfoBean;
+import com.analyze.basic.accessFlag.ClassAccessFlagAnalyze;
+import com.analyze.basic.accessFlag.bean.ClassAccessBean;
+import com.analyze.basic.classMsg.ClassBasicMsgAnalyze;
+import com.analyze.basic.classMsg.bean.ClassBasicMsg;
 import com.analyze.constant.ConstAnalyze;
 import com.analyze.constant.bean.ConstBean;
 import com.analyze.field.FieldAnalyze;
 import com.analyze.field.bean.FieldBean;
+import com.analyze.method.MethodAnalyze;
+import com.analyze.method.bean.MethodBean;
 import com.utils.UToNumeric;
 
 import java.io.*;
@@ -33,37 +39,17 @@ public class ClassAnalyze {
         in.read(u4);
         System.out.println(getVersion(u4));
 
-        //常量池长度
-        in.read(u2);
-        int constCount = UToNumeric.u2ToInt(u2);
-        System.out.println("常量池长度：" + constCount);
+        ConstBean[] consts = new ConstAnalyze().getConstBeans(in);
 
-        ConstBean[] consts = new ConstAnalyze().getConstBeans(constCount, in);
+        ClassBasicMsg classBasicMsg = new ClassBasicMsgAnalyze().getClassBasicMsg(in);
 
-        in.read(u2);
-        ClassAccessBean classAccessBean = ClassAccessFlagAnalyze.getAccessBean(u2);
+        FieldBean[] fieldBeans = new FieldAnalyze().getFieldBeans(in);
 
-        in.read(u2);
-        int classIndex = UToNumeric.u2ToInt(u2);
+        MethodBean[] methodBeans = new MethodAnalyze().getMethodBeans(in);
 
-        in.read(u2);
-        int parentClassIndex = UToNumeric.u2ToInt(u2);
+        AttributeInfoBean[] classAttributes = new AttributeAnalyze().getAttributeInfoBeans(in);
 
-        in.read(u2);
-        int interfaceCount = UToNumeric.u2ToInt(u2);
-        int[] interfaceIndexs = new int[interfaceCount];
-        if(interfaceCount > 0){
-            for(int i=0; i< interfaceCount;i++){
-                in.read(u2);
-                int interfaceIndex = UToNumeric.u2ToInt(u2);
-                interfaceIndexs[i] = interfaceIndex;
-            }
-        }
-
-        in.read(u2);
-        int fieldCount = UToNumeric.u2ToInt(u2);
-        FieldBean[] fieldBeans = new FieldAnalyze().getFieldBeans(fieldCount, in);
-
+        System.out.println("class文件流中尚未解析字节数：" + in.available());
         in.close();
     }
 

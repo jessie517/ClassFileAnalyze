@@ -1,6 +1,6 @@
-package com.analyze.accessFlag.bean;
+package com.analyze.basic.accessFlag.bean;
 
-import com.analyze.accessFlag.ClassAccessFlagAnalyze;
+import com.analyze.basic.accessFlag.ClassAccessFlagAnalyze;
 
 /**
  * Created by chenjiaxu on 2017/10/27.
