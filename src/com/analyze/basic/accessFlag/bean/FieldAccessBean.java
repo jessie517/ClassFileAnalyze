@@ -6,7 +6,16 @@ import com.analyze.basic.accessFlag.FieldAccessFlagAnalyze;
  * Created by chenjiaxu on 2017/10/27.
  */
 public class FieldAccessBean {
-
+    public static int ACC_PUBLIC = 0X0001;
+    public static int ACC_PRIVATE = 0X0002;
+    public static int ACC_PROTECTED = 0X0004;
+    public static int ACC_STATIC = 0X0008;
+    public static int ACC_FINAL = 0X0010;
+    public static int ACC_VOLATILE = 0X0040;
+    public static int ACC_TRANSIENT = 0X0080;
+    public static int ACC_SYNTHETIC = 0X1000;
+    public static int ACC_ENUM = 0X4000;
+    
     private boolean isPublic;
     private boolean isPrivate;
     private boolean isProtected;
@@ -19,31 +28,31 @@ public class FieldAccessBean {
 
     public FieldAccessBean(byte[] b) {
         int accessFlag = b[0] << 8 | b[1];
-        if ((accessFlag & FieldAccessFlagAnalyze.ACC_PUBLIC) == FieldAccessFlagAnalyze.ACC_PUBLIC) {
+        if ((accessFlag & ACC_PUBLIC) == ACC_PUBLIC) {
             this.isPublic = true;
         }
-        if ((accessFlag & FieldAccessFlagAnalyze.ACC_PRIVATE) == FieldAccessFlagAnalyze.ACC_PRIVATE) {
+        if ((accessFlag & ACC_PRIVATE) == ACC_PRIVATE) {
             this.isPrivate = true;
         }
-        if ((accessFlag & FieldAccessFlagAnalyze.ACC_PROTECTED) == FieldAccessFlagAnalyze.ACC_PROTECTED) {
+        if ((accessFlag & ACC_PROTECTED) == ACC_PROTECTED) {
             this.isProtected = true;
         }
-        if ((accessFlag & FieldAccessFlagAnalyze.ACC_STATIC) == FieldAccessFlagAnalyze.ACC_STATIC) {
+        if ((accessFlag & ACC_STATIC) == ACC_STATIC) {
             this.isStatic = true;
         }
-        if ((accessFlag & FieldAccessFlagAnalyze.ACC_FINAL) == FieldAccessFlagAnalyze.ACC_FINAL) {
+        if ((accessFlag & ACC_FINAL) == ACC_FINAL) {
             this.isFinal = true;
         }
-        if ((accessFlag & FieldAccessFlagAnalyze.ACC_VOLATILE) == FieldAccessFlagAnalyze.ACC_VOLATILE) {
+        if ((accessFlag & ACC_VOLATILE) == ACC_VOLATILE) {
             this.isVolatile = true;
         }
-        if ((accessFlag & FieldAccessFlagAnalyze.ACC_TRANSIENT) == FieldAccessFlagAnalyze.ACC_TRANSIENT) {
+        if ((accessFlag & ACC_TRANSIENT) == ACC_TRANSIENT) {
             this.isTransient = true;
         }
-        if ((accessFlag & FieldAccessFlagAnalyze.ACC_SYNTHETIC) == FieldAccessFlagAnalyze.ACC_SYNTHETIC) {
+        if ((accessFlag & ACC_SYNTHETIC) == ACC_SYNTHETIC) {
             this.isSynthtic = true;
         }
-        if ((accessFlag & FieldAccessFlagAnalyze.ACC_ENUM) == FieldAccessFlagAnalyze.ACC_ENUM) {
+        if ((accessFlag & ACC_ENUM) == ACC_ENUM) {
             this.isEnum = true;
         }
     }

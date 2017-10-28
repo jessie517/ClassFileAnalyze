@@ -6,7 +6,19 @@ import com.analyze.basic.accessFlag.MethodAccessFlagAnalyze;
  * Created by chenjiaxu on 2017/10/28.
  */
 public class MethodAccessBean {
-
+    public static int ACC_PUBLIC = 0X0001;
+    public static int ACC_PRIVATE = 0X0002;
+    public static int ACC_PROTECTED = 0X0004;
+    public static int ACC_STATIC = 0X0008;
+    public static int ACC_FINAL = 0X0010;
+    public static int ACC_SYNCHRONIZED = 0X0020;
+    public static int ACC_BRIDGE = 0X0040;
+    public static int ACC_VARARGS = 0X0080;
+    public static int ACC_NATIVE = 0X0100;
+    public static int ACC_ABSTRACT = 0X0400;
+    public static int ACC_STRICT = 0X0800;
+    public static int ACC_SYNTHETIC = 0X1000;
+    
     private boolean isPublic;
     private boolean isPrivate;
     private boolean isProtected;
@@ -22,40 +34,40 @@ public class MethodAccessBean {
 
     public MethodAccessBean(byte[] b) {
         int accessFlag = b[0] << 8 | b[1];
-        if ((accessFlag & MethodAccessFlagAnalyze.ACC_PUBLIC) == MethodAccessFlagAnalyze.ACC_PUBLIC) {
+        if ((accessFlag & ACC_PUBLIC) == ACC_PUBLIC) {
             this.isPublic = true;
         }
-        if ((accessFlag & MethodAccessFlagAnalyze.ACC_PRIVATE) == MethodAccessFlagAnalyze.ACC_PRIVATE) {
+        if ((accessFlag & ACC_PRIVATE) == ACC_PRIVATE) {
             this.isPrivate = true;
         }
-        if ((accessFlag & MethodAccessFlagAnalyze.ACC_PROTECTED) == MethodAccessFlagAnalyze.ACC_PROTECTED) {
+        if ((accessFlag & ACC_PROTECTED) == ACC_PROTECTED) {
             this.isProtected = true;
         }
-        if ((accessFlag & MethodAccessFlagAnalyze.ACC_STATIC) == MethodAccessFlagAnalyze.ACC_STATIC) {
+        if ((accessFlag & ACC_STATIC) == ACC_STATIC) {
             this.isStatic = true;
         }
-        if ((accessFlag & MethodAccessFlagAnalyze.ACC_FINAL) == MethodAccessFlagAnalyze.ACC_FINAL) {
+        if ((accessFlag & ACC_FINAL) == ACC_FINAL) {
             this.isFinal = true;
         }
-        if ((accessFlag & MethodAccessFlagAnalyze.ACC_SYNCHRONIZED) == MethodAccessFlagAnalyze.ACC_SYNCHRONIZED) {
+        if ((accessFlag & ACC_SYNCHRONIZED) == ACC_SYNCHRONIZED) {
             this.isSynchronized = true;
         }
-        if ((accessFlag & MethodAccessFlagAnalyze.ACC_BRIDGE) == MethodAccessFlagAnalyze.ACC_BRIDGE) {
+        if ((accessFlag & ACC_BRIDGE) == ACC_BRIDGE) {
             this.isBridge = true;
         }
-        if ((accessFlag & MethodAccessFlagAnalyze.ACC_VARARGS) == MethodAccessFlagAnalyze.ACC_VARARGS) {
+        if ((accessFlag & ACC_VARARGS) == ACC_VARARGS) {
             this.isVarargs = true;
         }
-        if ((accessFlag & MethodAccessFlagAnalyze.ACC_NATIVE) == MethodAccessFlagAnalyze.ACC_NATIVE) {
+        if ((accessFlag & ACC_NATIVE) == ACC_NATIVE) {
             this.isNative = true;
         }
-        if ((accessFlag & MethodAccessFlagAnalyze.ACC_ABSTRACT) == MethodAccessFlagAnalyze.ACC_ABSTRACT) {
+        if ((accessFlag & ACC_ABSTRACT) == ACC_ABSTRACT) {
             this.isAbstract = true;
         }
-        if ((accessFlag & MethodAccessFlagAnalyze.ACC_STRICT) == MethodAccessFlagAnalyze.ACC_STRICT) {
+        if ((accessFlag & ACC_STRICT) == ACC_STRICT) {
             this.isStrict = true;
         }
-        if ((accessFlag & MethodAccessFlagAnalyze.ACC_SYNTHETIC) == MethodAccessFlagAnalyze.ACC_SYNTHETIC) {
+        if ((accessFlag & ACC_SYNTHETIC) == ACC_SYNTHETIC) {
             this.isSynthtic = true;
         }
     }

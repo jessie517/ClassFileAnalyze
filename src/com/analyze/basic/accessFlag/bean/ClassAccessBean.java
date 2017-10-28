@@ -6,6 +6,17 @@ import com.analyze.basic.accessFlag.ClassAccessFlagAnalyze;
  * Created by chenjiaxu on 2017/10/27.
  */
 public class ClassAccessBean {
+    public static int ACC_PUBLIC = 0X0001;
+    public static int ACC_FINAL = 0X0010;
+    public static int ACC_SUPER = 0X0020;
+
+    public static int ACC_INTERFACE = 0X0200;
+    public static int ACC_ABSTRACT = 0X0400;
+
+    public static int ACC_SYNTHETIC = 0X1000;
+    public static int ACC_ANNOTATION = 0X2000;
+    public static int ACC_ENUM = 0X4000;
+    
     private boolean isPublic;
     private boolean isFinal;
     private boolean isSuper;
@@ -19,28 +30,28 @@ public class ClassAccessBean {
 
     public ClassAccessBean(byte[] b) {
         int accessFlag = b[0] << 8 | b[1];
-        if ((accessFlag & ClassAccessFlagAnalyze.ACC_PUBLIC) == ClassAccessFlagAnalyze.ACC_PUBLIC) {
+        if ((accessFlag & ACC_PUBLIC) == ACC_PUBLIC) {
             this.isPublic = true;
         }
-        if ((accessFlag & ClassAccessFlagAnalyze.ACC_FINAL) == ClassAccessFlagAnalyze.ACC_FINAL) {
+        if ((accessFlag & ACC_FINAL) == ACC_FINAL) {
             this.isFinal = true;
         }
-        if ((accessFlag & ClassAccessFlagAnalyze.ACC_SUPER) == ClassAccessFlagAnalyze.ACC_SUPER) {
+        if ((accessFlag & ACC_SUPER) == ACC_SUPER) {
             this.isSuper = true;
         }
-        if ((accessFlag & ClassAccessFlagAnalyze.ACC_INTERFACE) == ClassAccessFlagAnalyze.ACC_INTERFACE) {
+        if ((accessFlag & ACC_INTERFACE) == ACC_INTERFACE) {
             this.isInterface = true;
         }
-        if ((accessFlag & ClassAccessFlagAnalyze.ACC_ABSTRACT) == ClassAccessFlagAnalyze.ACC_ABSTRACT) {
+        if ((accessFlag & ACC_ABSTRACT) == ACC_ABSTRACT) {
             this.isAbstract = true;
         }
-        if ((accessFlag & ClassAccessFlagAnalyze.ACC_SYNTHETIC) == ClassAccessFlagAnalyze.ACC_SYNTHETIC) {
+        if ((accessFlag & ACC_SYNTHETIC) == ACC_SYNTHETIC) {
             this.isSynthtic = true;
         }
-        if ((accessFlag & ClassAccessFlagAnalyze.ACC_ANNOTATION) == ClassAccessFlagAnalyze.ACC_ANNOTATION) {
+        if ((accessFlag & ACC_ANNOTATION) == ACC_ANNOTATION) {
             this.isAnnotation = true;
         }
-        if ((accessFlag & ClassAccessFlagAnalyze.ACC_ENUM) == ClassAccessFlagAnalyze.ACC_ENUM) {
+        if ((accessFlag & ACC_ENUM) == ACC_ENUM) {
             this.isEnum = true;
         }
     }
