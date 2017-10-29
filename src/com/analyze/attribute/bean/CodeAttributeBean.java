@@ -2,6 +2,7 @@ package com.analyze.attribute.bean;
 
 import com.analyze.attribute.AttributeAnalyze;
 import com.analyze.constant.bean.ConstBean;
+import com.code.CodeToString;
 
 import java.io.ByteArrayInputStream;
 import java.util.Arrays;
@@ -71,6 +72,13 @@ public class CodeAttributeBean extends AttributeInfoBean {
 
     public void setAttributeInfoBeans(AttributeInfoBean[] attributeInfoBeans) {
         this.attributeInfoBeans = attributeInfoBeans;
+    }
+
+    public String toString(){
+        StringBuffer stringBuffer = new StringBuffer();
+        byte[] code = this.getCode();
+        stringBuffer.append(Arrays.toString(CodeToString.codesToString(code)));
+        return stringBuffer.toString();
     }
 
     public static ExceptionInfoBean[] getExceptionTable(byte[] exceptionTableBytes) throws Exception {
