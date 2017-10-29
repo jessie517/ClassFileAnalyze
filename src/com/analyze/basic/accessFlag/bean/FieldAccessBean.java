@@ -92,4 +92,33 @@ public class FieldAccessBean {
     public boolean isEnum() {
         return isEnum;
     }
+
+    @Override
+    public String toString() {
+        StringBuffer stringBuffer = new StringBuffer();
+        if (isPublic()) {
+            stringBuffer.append("public ");
+        } else if (isPrivate()){
+            stringBuffer.append("private ");
+        } else if (isProtected()){
+            stringBuffer.append("protected ");
+        }
+        if(isStatic()){
+            stringBuffer.append("static ");
+        }
+        if (isFinal()) {
+            stringBuffer.append("final ");
+        }
+        if (isVolatile()) {
+            stringBuffer.append("volatile ");
+        }
+        if (isTransient()) {
+            stringBuffer.append("transient ");
+        }
+        if (isEnum()) {
+            stringBuffer.append("enum ");
+        }
+
+        return stringBuffer.toString();
+    }
 }

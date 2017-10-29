@@ -76,95 +76,77 @@ public class MethodAccessBean {
         return isPublic;
     }
 
-    public void setPublic(boolean aPublic) {
-        isPublic = aPublic;
-    }
-
     public boolean isPrivate() {
         return isPrivate;
-    }
-
-    public void setPrivate(boolean aPrivate) {
-        isPrivate = aPrivate;
     }
 
     public boolean isProtected() {
         return isProtected;
     }
 
-    public void setProtected(boolean aProtected) {
-        isProtected = aProtected;
-    }
-
     public boolean isStatic() {
         return isStatic;
-    }
-
-    public void setStatic(boolean aStatic) {
-        isStatic = aStatic;
     }
 
     public boolean isFinal() {
         return isFinal;
     }
 
-    public void setFinal(boolean aFinal) {
-        isFinal = aFinal;
-    }
-
     public boolean isSynchronized() {
         return isSynchronized;
-    }
-
-    public void setSynchronized(boolean aSynchronized) {
-        isSynchronized = aSynchronized;
     }
 
     public boolean isBridge() {
         return isBridge;
     }
 
-    public void setBridge(boolean bridge) {
-        isBridge = bridge;
-    }
-
     public boolean isVarargs() {
         return isVarargs;
-    }
-
-    public void setVarargs(boolean varargs) {
-        isVarargs = varargs;
     }
 
     public boolean isNative() {
         return isNative;
     }
 
-    public void setNative(boolean aNative) {
-        isNative = aNative;
-    }
-
     public boolean isAbstract() {
         return isAbstract;
-    }
-
-    public void setAbstract(boolean anAbstract) {
-        isAbstract = anAbstract;
     }
 
     public boolean isStrict() {
         return isStrict;
     }
 
-    public void setStrict(boolean strict) {
-        isStrict = strict;
-    }
-
     public boolean isSynthtic() {
         return isSynthtic;
     }
 
-    public void setSynthtic(boolean synthtic) {
-        isSynthtic = synthtic;
+    @Override
+    public String toString() {
+        StringBuffer stringBuffer = new StringBuffer();
+        if (isPublic()) {
+            stringBuffer.append("public ");
+        } else if (isPrivate()){
+            stringBuffer.append("private ");
+        } else if (isProtected()){
+            stringBuffer.append("protected ");
+        }
+        if(isSynchronized()){
+            stringBuffer.append("synchronized ");
+        }
+        if(isNative()){
+            stringBuffer.append("native ");
+        }
+        if(isStatic()){
+            stringBuffer.append("static ");
+        }
+        if(isAbstract()){
+            stringBuffer.append("abstract ");
+        } else if (isFinal()) {
+            stringBuffer.append("final ");
+        }
+        if(isVarargs()){
+            stringBuffer.append("varargs ");
+        }
+        return stringBuffer.toString();
     }
 }

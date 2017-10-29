@@ -16,7 +16,7 @@ public class ClassAccessBean {
     public static final int ACC_SYNTHETIC = 0X1000;
     public static final int ACC_ANNOTATION = 0X2000;
     public static final int ACC_ENUM = 0X4000;
-    
+
     private boolean isPublic;
     private boolean isFinal;
     private boolean isSuper;
@@ -88,4 +88,28 @@ public class ClassAccessBean {
         return isEnum;
     }
 
+    @Override
+    public String toString() {
+        StringBuffer stringBuffer = new StringBuffer();
+        if (isPublic()) {
+            stringBuffer.append("public ");
+        }
+        if (isAbstract()) {
+            stringBuffer.append("abstract ");
+        }
+        if (isFinal()) {
+            stringBuffer.append("final ");
+        }
+        if (isAnnotation()) {
+            stringBuffer.append("annotation ");
+        } else if (isInterface()) {
+            stringBuffer.append("interface ");
+        } else if (isEnum()) {
+            stringBuffer.append("enum ");
+        } else {
+            stringBuffer.append("class ");
+        }
+
+        return stringBuffer.toString();
+    }
 }

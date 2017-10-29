@@ -21,7 +21,14 @@ import java.math.BigInteger;
  * Created by chenjiaxu on 2017/10/23.
  */
 public class ClassAnalyze {
-    public void analyze(String path) throws Exception {
+    private double version;
+    private ClassBasicMsg classBasicMsg;
+    private ConstBean[] constBeans;
+    private FieldBean[] fieldBeans;
+    private MethodBean[] methodBeans;
+    private AttributeInfoBean[] classAttributes;
+
+    public ClassAnalyze(String path) throws Exception {
         File file = new File(path);
         InputStream inputStream = new FileInputStream(file);
         BufferedInputStream in = new BufferedInputStream(inputStream);
@@ -37,17 +44,17 @@ public class ClassAnalyze {
 
         //版本号
         in.read(u4);
-        System.out.println(getVersion(u4));
+        this.version = getVersion(u4);
 
-        ConstBean[] consts = new ConstAnalyze().getConstBeans(in);
+        this.constBeans = new ConstAnalyze().getConstBeans(in);
 
-        ClassBasicMsg classBasicMsg = new ClassBasicMsgAnalyze().getClassBasicMsg(in);
+        this.classBasicMsg = new ClassBasicMsgAnalyze().getClassBasicMsg(in);
 
-        FieldBean[] fieldBeans = new FieldAnalyze().getFieldBeans(in, consts);
+        this.fieldBeans = new FieldAnalyze().getFieldBeans(in, constBeans);
 
-        MethodBean[] methodBeans = new MethodAnalyze().getMethodBeans(in, consts);
+        this.methodBeans = new MethodAnalyze().getMethodBeans(in, constBeans);
 
-        AttributeInfoBean[] classAttributes = new AttributeAnalyze().getAttributeInfoBeans(in, consts);
+        this.classAttributes = new AttributeAnalyze().getAttributeInfoBeans(in, constBeans);
 
         System.out.println("class文件流中尚未解析字节数：" + in.available());
         in.close();
@@ -66,4 +73,51 @@ public class ClassAnalyze {
         return Double.parseDouble(major + "." + minor);
     }
 
+    public double getVersion() {
+        return version;
+    }
+
+    public void setVersion(double version) {
+        this.version = version;
+    }
+
+    public ClassBasicMsg getClassBasicMsg() {
+        return classBasicMsg;
+    }
+
+    public void setClassBasicMsg(ClassBasicMsg classBasicMsg) {
+        this.classBasicMsg = classBasicMsg;
+    }
+
+    public ConstBean[] getConstBeans() {
+        return constBeans;
+    }
+
+    public void setConstBeans(ConstBean[] constBeans) {
+        this.constBeans = constBeans;
+    }
+
+    public FieldBean[] getFieldBeans() {
+        return fieldBeans;
+    }
+
+    public void setFieldBeans(FieldBean[] fieldBeans) {
+        this.fieldBeans = fieldBeans;
+    }
+
+    public MethodBean[] getMethodBeans() {
+        return methodBeans;
+    }
+
+    public void setMethodBeans(MethodBean[] methodBeans) {
+        this.methodBeans = methodBeans;
+    }
+
+    public AttributeInfoBean[] getClassAttributes() {
+        return classAttributes;
+    }
+
+    public void setClassAttributes(AttributeInfoBean[] classAttributes) {
+        this.classAttributes = classAttributes;
+    }
 }

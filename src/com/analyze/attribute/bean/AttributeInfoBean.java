@@ -78,4 +78,11 @@ public class AttributeInfoBean {
         }
     }
 
+    public String toString(ConstBean[] constBeans){
+        if(this.getAttributeInfoBean() != null){
+            return this.getAttributeInfoBean().toString();
+        } else {
+            return "待完善";
+        }
+    }
 }

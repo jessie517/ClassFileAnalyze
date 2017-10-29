@@ -1,6 +1,7 @@
 package com.analyze.basic.classMsg.bean;
 
 import com.analyze.basic.accessFlag.bean.ClassAccessBean;
+import com.analyze.constant.bean.ConstBean;
 
 /**
  * Created by chenjiaxu on 2017/10/28.
@@ -41,5 +42,17 @@ public class ClassBasicMsg {
 
     public void setInterfaceIndexs(int[] interfaceIndexs) {
         this.interfaceIndexs = interfaceIndexs;
+    }
+
+    public String toString(ConstBean[] constBeans) {
+        StringBuffer stringBuffer = new StringBuffer();
+        stringBuffer.append("class: " + constBeans[((int[]) constBeans[classIndex].getValue())[0]].getValue() + "\n");
+        stringBuffer.append("accessFlag: " + classAccessBean.toString() + "\n");
+        stringBuffer.append("parentClass: " + constBeans[((int[]) constBeans[parentClassIndex].getValue())[0]].getValue() + "\n");
+        stringBuffer.append("interfaces: ");
+        for (int i = 0; i < interfaceIndexs.length; i++) {
+            stringBuffer.append(constBeans[((int[]) constBeans[interfaceIndexs[i]].getValue())[0]].getValue() + ", ");
+        }
+        return stringBuffer.toString();
     }
 }

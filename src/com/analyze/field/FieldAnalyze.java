@@ -32,7 +32,7 @@ public class FieldAnalyze {
             fieldBean.setNameIndex(UToNumeric.u2ToInt(u2));
 
             in.read(u2);
-            fieldBean.setDescriptorInde(UToNumeric.u2ToInt(u2));
+            fieldBean.setDescriptorIndex(UToNumeric.u2ToInt(u2));
 
             fieldBean.setAttributeInfoBeans(attributeAnalyze.getAttributeInfoBeans(in, constBeans));
 

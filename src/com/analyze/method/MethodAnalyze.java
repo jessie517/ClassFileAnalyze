@@ -33,7 +33,7 @@ public class MethodAnalyze {
             methodBean.setNameIndex(UToNumeric.u2ToInt(u2));
 
             in.read(u2);
-            methodBean.setDescriptorInde(UToNumeric.u2ToInt(u2));
+            methodBean.setDescriptorIndex(UToNumeric.u2ToInt(u2));
 
             methodBean.setAttributeInfoBeans(attributeAnalyze.getAttributeInfoBeans(in,constBeans));
 

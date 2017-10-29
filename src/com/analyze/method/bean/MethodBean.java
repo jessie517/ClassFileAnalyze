@@ -2,6 +2,7 @@ package com.analyze.method.bean;
 
 import com.analyze.basic.accessFlag.bean.MethodAccessBean;
 import com.analyze.attribute.bean.AttributeInfoBean;
+import com.analyze.constant.bean.ConstBean;
 
 /**
  * Created by chenjiaxu on 2017/10/27.
@@ -9,7 +10,7 @@ import com.analyze.attribute.bean.AttributeInfoBean;
 public class MethodBean {
     private MethodAccessBean methodAccessBean;
     private int nameIndex;
-    private int descriptorInde;
+    private int descriptorIndex;
     private AttributeInfoBean[] attributeInfoBeans;
 
     public MethodAccessBean getMethodAccessBean() {
@@ -28,12 +29,12 @@ public class MethodBean {
         this.nameIndex = nameIndex;
     }
 
-    public int getDescriptorInde() {
-        return descriptorInde;
+    public int getDescriptorIndex() {
+        return descriptorIndex;
     }
 
-    public void setDescriptorInde(int descriptorInde) {
-        this.descriptorInde = descriptorInde;
+    public void setDescriptorIndex(int descriptorIndex) {
+        this.descriptorIndex = descriptorIndex;
     }
 
     public AttributeInfoBean[] getAttributeInfoBeans() {
@@ -42,5 +43,18 @@ public class MethodBean {
 
     public void setAttributeInfoBeans(AttributeInfoBean[] attributeInfoBeans) {
         this.attributeInfoBeans = attributeInfoBeans;
+    }
+
+    public String toString(ConstBean[] constBeans){
+        StringBuffer stringBuffer = new StringBuffer();
+        stringBuffer.append(constBeans[nameIndex].getValue() + "\n");
+        stringBuffer.append("\taccessFlag: " + methodAccessBean.toString() + "\n");
+        stringBuffer.append("\tdescriptor: " + constBeans[descriptorIndex].getValue() + "\n");
+        stringBuffer.append("\tattributes: " + "\n");
+        for (int i = 0; i < attributeInfoBeans.length; i++) {
+            stringBuffer.append("\t\t" + attributeInfoBeans[i].toString(constBeans) + "\n");
+        }
+
+        return stringBuffer.toString();
     }
 }
