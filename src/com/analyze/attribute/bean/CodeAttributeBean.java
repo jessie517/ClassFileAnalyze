@@ -22,7 +22,6 @@ public class CodeAttributeBean extends AttributeInfoBean {
         this.maxStack = (infoBytes[i++] & 0xFF) << 8 | (infoBytes[i++] & 0xFF);
         this.maxLocals = (infoBytes[i++] & 0xFF) << 8 | (infoBytes[i++] & 0xFF);
 
-        //TODO
         int codeLength = (infoBytes[i++] & 0xFF) << 24 | (infoBytes[i++] & 0xFF) << 16 | (infoBytes[i++] & 0xFF) << 8 | (infoBytes[i++] & 0xFF);
         this.code = Arrays.copyOfRange(infoBytes, i, (i = i + codeLength));
 

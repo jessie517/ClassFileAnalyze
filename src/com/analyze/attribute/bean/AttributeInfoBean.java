@@ -41,12 +41,28 @@ public class AttributeInfoBean {
         Object attributeName = constBeans[attributeNameIndex].getValue();
         if ("Code".equals(attributeName)) {
             this.setAttributeInfoBean(new CodeAttributeBean(infoBytes, constBeans));
+        } else if ("StackMapTable".equals(attributeName)) {
+
         } else if ("Exceptions".equals(attributeName)) {
             this.setAttributeInfoBean(new ExceptionAttributeBean(infoBytes));
         } else if ("LineNumberTable".equals(attributeName)) {
             this.setAttributeInfoBean(new LineNumberTableAttributeBean(infoBytes));
         } else if ("LocalVariableTable".equals(attributeName)) {
             this.setAttributeInfoBean(new LocalVariableTableAttributeBean(infoBytes));
+        } else if ("LocalVariableTypeTable".equals(attributeName)) {
+            this.setAttributeInfoBean(new LocalVariableTypeTableAttributeBean(infoBytes));
+        } else if ("RuntimeVisibleParameterAnnotations".equals(attributeName)) {
+
+        } else if ("RuntimeInvisibleParameterAnnotations".equals(attributeName)) {
+
+        } else if ("AnnotationDefault".equals(attributeName)) {
+
+        } else if ("RuntimeVisibleAnnotations".equals(attributeName)) {
+
+        } else if ("RuntimeInvisibleAnnotations".equals(attributeName)) {
+
+        } else if ("Signature".equals(attributeName)) {
+            this.setAttributeInfoBean(new SignatureAttributeBean(infoBytes));
         } else if ("SourceFile".equals(attributeName)) {
             this.setAttributeInfoBean(new SourceFileAttributeBean(infoBytes));
         } else if ("ConstantValue".equals(attributeName)) {
