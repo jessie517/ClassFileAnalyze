@@ -22,8 +22,9 @@ public class PrintClassMsg {
         AttributeInfoBean[] classAttributes = classAnalyze.getClassAttributes();
         classMsgBuffer.append("classAttributes: " + "\n");
         for (int i = 0; i < classAttributes.length; i++) {
-            classMsgBuffer.append("\t" + classAttributes[i].toString(constBeans) + "\n");
+            classMsgBuffer.append("\t" + classAttributes[i].toString() + "\n");
         }
+        classMsgBuffer.append("\n");
 
         FieldBean[] fieldBeans = classAnalyze.getFieldBeans();
         classMsgBuffer.append("fieldBeans: " + "\n");

@@ -52,7 +52,7 @@ public class MethodBean {
         stringBuffer.append("\tdescriptor: " + constBeans[descriptorIndex].getValue() + "\n");
         stringBuffer.append("\tattributes: " + "\n");
         for (int i = 0; i < attributeInfoBeans.length; i++) {
-            stringBuffer.append("\t\t" + attributeInfoBeans[i].toString(constBeans) + "\n");
+            stringBuffer.append("\t\t" + attributeInfoBeans[i].toString() + "\n");
         }
 
         return stringBuffer.toString();

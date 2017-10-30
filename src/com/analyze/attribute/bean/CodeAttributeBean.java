@@ -77,7 +77,14 @@ public class CodeAttributeBean extends AttributeInfoBean {
     public String toString(){
         StringBuffer stringBuffer = new StringBuffer();
         byte[] code = this.getCode();
-        stringBuffer.append(Arrays.toString(CodeToString.codesToString(code)));
+        stringBuffer.append("code: " + Arrays.toString(CodeToString.codesToString(code)) + "\n");
+        stringBuffer.append("exceptionTable: " + "\n");
+        for(int i =0; i<exceptionTable.length; i++){
+            stringBuffer.append("\t" + exceptionTable[i].toString() + "\n");
+        }
+        for(int i=0; i<attributeInfoBeans.length; i++){
+            stringBuffer.append(attributeInfoBeans[i].toString() + "\n");
+        }
         return stringBuffer.toString();
     }
 
@@ -131,6 +138,10 @@ public class CodeAttributeBean extends AttributeInfoBean {
 
         public void setCatchType(int catchType) {
             this.catchType = catchType;
+        }
+
+        public String toString(){
+            return "startPc: " + getStartPc() + "; endPc: " + getEndPc() + "; handlerPc: " + handlerPc + "; catchType: " + catchType;
         }
     }
 }

@@ -78,7 +78,7 @@ public class AttributeInfoBean {
         }
     }
 
-    public String toString(ConstBean[] constBeans){
+    public String toString(){
         if(this.getAttributeInfoBean() != null){
             return this.getAttributeInfoBean().toString();
         } else {
