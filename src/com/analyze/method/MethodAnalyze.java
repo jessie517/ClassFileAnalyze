@@ -1,7 +1,8 @@
 package com.analyze.method;
 
-import com.analyze.basic.accessFlag.MethodAccessFlagAnalyze;
 import com.analyze.attribute.AttributeAnalyze;
+import com.analyze.attribute.MethodAttributeAnalyze;
+import com.analyze.basic.accessFlag.MethodAccessFlagAnalyze;
 import com.analyze.constant.bean.ConstBean;
 import com.analyze.method.bean.MethodBean;
 import com.utils.UToNumeric;
@@ -22,7 +23,7 @@ public class MethodAnalyze {
         int methodCount = UToNumeric.u2ToInt(u2);
 
         MethodBean[] methodBeans = new MethodBean[methodCount];
-        AttributeAnalyze attributeAnalyze = new AttributeAnalyze();
+        AttributeAnalyze attributeAnalyze = new MethodAttributeAnalyze();
         for (int i = 0; i < methodCount; i++) {
             MethodBean methodBean = new MethodBean();
 
@@ -35,7 +36,7 @@ public class MethodAnalyze {
             in.read(u2);
             methodBean.setDescriptorIndex(UToNumeric.u2ToInt(u2));
 
-            methodBean.setAttributeInfoBeans(attributeAnalyze.getAttributeInfoBeans(in,constBeans));
+            methodBean.setAttributeInfoBeanMap(attributeAnalyze.getAttributeInfoBeans(in,constBeans));
 
             methodBeans[i] = methodBean;
         }

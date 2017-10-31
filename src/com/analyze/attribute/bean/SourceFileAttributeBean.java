@@ -3,7 +3,7 @@ package com.analyze.attribute.bean;
 /**
  * Created by chenjiaxu on 2017/10/28.
  */
-public class SourceFileAttributeBean extends AttributeInfoBean {
+public class SourceFileAttributeBean implements AttributeInfoBean {
     private int sourceFileIndex;
 
     public SourceFileAttributeBean(byte[] infoBytes) {

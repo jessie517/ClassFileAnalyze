@@ -5,7 +5,7 @@ import java.util.Arrays;
 /**
  * Created by chenjiaxu on 2017/10/28.
  */
-public class LineNumberTableAttributeBean extends AttributeInfoBean {
+public class LineNumberTableAttributeBean implements AttributeInfoBean {
     private LineNumberInfo[] lineNumberInfoTable;
 
     public LineNumberTableAttributeBean(byte[] infoBytes) {

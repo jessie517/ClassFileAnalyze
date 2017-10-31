@@ -6,6 +6,9 @@ import com.analyze.constant.bean.ConstBean;
 import com.analyze.field.bean.FieldBean;
 import com.analyze.method.bean.MethodBean;
 
+import java.util.Map;
+import java.util.Set;
+
 /**
  * Created by chenjiaxu on 2017/10/29.
  */
@@ -19,10 +22,9 @@ public class PrintClassMsg {
 
         classMsgBuffer.append(classAnalyze.getClassBasicMsg().toString(constBeans) + "\n");
 
-        AttributeInfoBean[] classAttributes = classAnalyze.getClassAttributes();
-        classMsgBuffer.append("classAttributes: " + "\n");
-        for (int i = 0; i < classAttributes.length; i++) {
-            classMsgBuffer.append("\t" + classAttributes[i].toString() + "\n");
+        Set<Map.Entry<String, AttributeInfoBean>> entries = classAnalyze.getClassAttributes().entrySet();
+        for (Map.Entry<String, AttributeInfoBean> entry : entries) {
+            classMsgBuffer.append("\t\t" + entry.getKey() + ":" + entry.getValue() + "\n");
         }
         classMsgBuffer.append("\n");
 

@@ -3,7 +3,7 @@ package com.analyze.attribute.bean;
 /**
  * Created by chenjiaxu on 2017/10/28.
  */
-public class ConstantValueAttributeBean extends AttributeInfoBean {
+public class ConstantValueAttributeBean implements AttributeInfoBean {
     private int constantValueIndex;
 
     public ConstantValueAttributeBean(byte[] infoBytes) {

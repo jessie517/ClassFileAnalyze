@@ -1,34 +1,37 @@
 package com.analyze.attribute;
 
-import com.analyze.attribute.bean.AttributeInfoBean;
+import com.analyze.attribute.bean.*;
 import com.analyze.constant.bean.ConstBean;
 import com.utils.UToNumeric;
 
 import java.io.InputStream;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
- * Created by chenjiaxu on 2017/10/27.
+ * Created by chenjiaxu on 2017/10/31.
  */
-public class AttributeAnalyze {
+public abstract class AttributeAnalyze {
     private byte[] u2 = new byte[2];
     private byte[] u4 = new byte[4];
 
-    public AttributeInfoBean[] getAttributeInfoBeans(InputStream in, ConstBean[] constBeans) throws Exception {
+    public Map<String, AttributeInfoBean> getAttributeInfoBeans(InputStream in, ConstBean[] constBeans) throws Exception {
         in.read(u2);
         int attributeCount = UToNumeric.u2ToInt(u2);
 
-        AttributeInfoBean[] attributeInfoBeans = new AttributeInfoBean[attributeCount];
-        for(int i=0; i<attributeCount;i++){
-            AttributeInfoBean attributeInfoBean = new AttributeInfoBean();
+        Map<String, AttributeInfoBean> attributeInfoBeanMap = new HashMap<String, AttributeInfoBean>();
+        for (int i = 0; i < attributeCount; i++) {
             in.read(u2);
-            attributeInfoBean.setAttributeNameIndex(UToNumeric.u2ToInt(u2));
+            int nameIndex = UToNumeric.u2ToInt(u2);
             in.read(u4);
             byte[] infoBytes = new byte[UToNumeric.u4ToInt(u4)];
             in.read(infoBytes);
-            attributeInfoBean.setInfoBytes(infoBytes);
-            attributeInfoBean.generateAttributeInfoBean(constBeans);
-            attributeInfoBeans[i] = attributeInfoBean;
+            String attributeName = (String)constBeans[nameIndex].getValue();
+            attributeInfoBeanMap.put(attributeName, getAttributeBean(attributeName, infoBytes, constBeans));
         }
-        return attributeInfoBeans;
+        return attributeInfoBeanMap;
     }
+
+    public abstract AttributeInfoBean getAttributeBean(String attributeName, byte[] infoBytes, ConstBean[] constBeans) throws Exception;
+
 }

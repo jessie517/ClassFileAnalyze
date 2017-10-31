@@ -5,7 +5,7 @@ import com.analyze.basic.accessFlag.bean.InnerClassAccessBean;
 /**
  * Created by chenjiaxu on 2017/10/28.
  */
-public class InnerClassesAttributeBean extends AttributeInfoBean {
+public class InnerClassesAttributeBean implements AttributeInfoBean {
     private InnerClassesInfo[] innerClassesInfoTable;
 
     public InnerClassesAttributeBean(byte[] infoBytes) {

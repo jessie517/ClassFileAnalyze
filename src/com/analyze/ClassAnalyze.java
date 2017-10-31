@@ -1,9 +1,8 @@
 package com.analyze;
 
 import com.analyze.attribute.AttributeAnalyze;
+import com.analyze.attribute.ClassAttributeAnalyze;
 import com.analyze.attribute.bean.AttributeInfoBean;
-import com.analyze.basic.accessFlag.ClassAccessFlagAnalyze;
-import com.analyze.basic.accessFlag.bean.ClassAccessBean;
 import com.analyze.basic.classMsg.ClassBasicMsgAnalyze;
 import com.analyze.basic.classMsg.bean.ClassBasicMsg;
 import com.analyze.constant.ConstAnalyze;
@@ -12,10 +11,10 @@ import com.analyze.field.FieldAnalyze;
 import com.analyze.field.bean.FieldBean;
 import com.analyze.method.MethodAnalyze;
 import com.analyze.method.bean.MethodBean;
-import com.utils.UToNumeric;
 
 import java.io.*;
 import java.math.BigInteger;
+import java.util.Map;
 
 /**
  * Created by chenjiaxu on 2017/10/23.
@@ -26,7 +25,7 @@ public class ClassAnalyze {
     private ConstBean[] constBeans;
     private FieldBean[] fieldBeans;
     private MethodBean[] methodBeans;
-    private AttributeInfoBean[] classAttributes;
+    private Map<String, AttributeInfoBean> classAttributes;
 
     public ClassAnalyze(String path) throws Exception {
         File file = new File(path);
@@ -54,7 +53,7 @@ public class ClassAnalyze {
 
         this.methodBeans = new MethodAnalyze().getMethodBeans(in, constBeans);
 
-        this.classAttributes = new AttributeAnalyze().getAttributeInfoBeans(in, constBeans);
+        this.classAttributes = new ClassAttributeAnalyze().getAttributeInfoBeans(in, constBeans);
 
         System.out.println("class文件流中尚未解析字节数：" + in.available());
         in.close();
@@ -113,11 +112,11 @@ public class ClassAnalyze {
         this.methodBeans = methodBeans;
     }
 
-    public AttributeInfoBean[] getClassAttributes() {
+    public Map<String, AttributeInfoBean> getClassAttributes() {
         return classAttributes;
     }
 
-    public void setClassAttributes(AttributeInfoBean[] classAttributes) {
+    public void setClassAttributes(Map<String, AttributeInfoBean> classAttributes) {
         this.classAttributes = classAttributes;
     }
 }

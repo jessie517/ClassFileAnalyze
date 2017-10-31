@@ -1,21 +1,22 @@
 package com.analyze.attribute.bean;
 
-import com.analyze.attribute.AttributeAnalyze;
+import com.analyze.attribute.CodeAttributeAnalyze;
 import com.analyze.constant.bean.ConstBean;
 import com.code.CodeToString;
 
 import java.io.ByteArrayInputStream;
 import java.util.Arrays;
+import java.util.Map;
 
 /**
  * Created by chenjiaxu on 2017/10/28.
  */
-public class CodeAttributeBean extends AttributeInfoBean {
+public class CodeAttributeBean implements AttributeInfoBean {
     private int maxStack;
     private int maxLocals;
     private byte[] code;
     private ExceptionInfoBean[] exceptionTable;
-    private AttributeInfoBean[] attributeInfoBeans;
+    private Map<String, AttributeInfoBean> attributeInfoBeanMap;
     public static final int EXCEPTION_INFO_BYTE_LENGTH = 8;
 
     public CodeAttributeBean(byte[] infoBytes, ConstBean[] constBeans) throws Exception {
@@ -31,7 +32,7 @@ public class CodeAttributeBean extends AttributeInfoBean {
         this.exceptionTable = getExceptionTable(exceptionTableBytes);
 
         byte[] attributeBytes = Arrays.copyOfRange(infoBytes, i, infoBytes.length);
-        this.attributeInfoBeans = new AttributeAnalyze().getAttributeInfoBeans(new ByteArrayInputStream(attributeBytes), constBeans);
+        this.attributeInfoBeanMap = new CodeAttributeAnalyze().getAttributeInfoBeans(new ByteArrayInputStream(attributeBytes), constBeans);
     }
 
     public int getMaxStack() {
@@ -66,25 +67,23 @@ public class CodeAttributeBean extends AttributeInfoBean {
         this.exceptionTable = exceptionTable;
     }
 
-    public AttributeInfoBean[] getAttributeInfoBeans() {
-        return attributeInfoBeans;
+    public Map<String, AttributeInfoBean> getAttributeInfoBeanMap() {
+        return attributeInfoBeanMap;
     }
 
-    public void setAttributeInfoBeans(AttributeInfoBean[] attributeInfoBeans) {
-        this.attributeInfoBeans = attributeInfoBeans;
+    public void setAttributeInfoBeanMap(Map<String, AttributeInfoBean> attributeInfoBeanMap) {
+        this.attributeInfoBeanMap = attributeInfoBeanMap;
     }
 
-    public String toString(){
+    public String toString() {
         StringBuffer stringBuffer = new StringBuffer();
         byte[] code = this.getCode();
         stringBuffer.append("code: " + Arrays.toString(CodeToString.codesToString(code)) + "\n");
         stringBuffer.append("exceptionTable: " + "\n");
-        for(int i =0; i<exceptionTable.length; i++){
+        for (int i = 0; i < exceptionTable.length; i++) {
             stringBuffer.append("\t" + exceptionTable[i].toString() + "\n");
         }
-        for(int i=0; i<attributeInfoBeans.length; i++){
-            stringBuffer.append(attributeInfoBeans[i].toString() + "\n");
-        }
+
         return stringBuffer.toString();
     }
 
@@ -93,10 +92,10 @@ public class CodeAttributeBean extends AttributeInfoBean {
         ExceptionInfoBean[] exceptionInfoBeanTable = new ExceptionInfoBean[exceptionTableLength];
         for (int i = 0; i < exceptionTableLength; i++) {
             ExceptionInfoBean exceptionInfoBean = new ExceptionInfoBean();
-            exceptionInfoBean.setStartPc((exceptionTableBytes[i * EXCEPTION_INFO_BYTE_LENGTH] & 0xFF) << 8 | (exceptionTableBytes[i * EXCEPTION_INFO_BYTE_LENGTH + 1] & 0xFF) );
-            exceptionInfoBean.setEndPc((exceptionTableBytes[i * EXCEPTION_INFO_BYTE_LENGTH + 2] & 0xFF)  << 8 | (exceptionTableBytes[i * EXCEPTION_INFO_BYTE_LENGTH + 3] & 0xFF) );
-            exceptionInfoBean.setHandlerPc((exceptionTableBytes[i * EXCEPTION_INFO_BYTE_LENGTH + 4] & 0xFF)  << 8 | (exceptionTableBytes[i * EXCEPTION_INFO_BYTE_LENGTH + 5] & 0xFF) );
-            exceptionInfoBean.setCatchType((exceptionTableBytes[i * EXCEPTION_INFO_BYTE_LENGTH + 6] & 0xFF)  << 8 | (exceptionTableBytes[i * EXCEPTION_INFO_BYTE_LENGTH + 7] & 0xFF) );
+            exceptionInfoBean.setStartPc((exceptionTableBytes[i * EXCEPTION_INFO_BYTE_LENGTH] & 0xFF) << 8 | (exceptionTableBytes[i * EXCEPTION_INFO_BYTE_LENGTH + 1] & 0xFF));
+            exceptionInfoBean.setEndPc((exceptionTableBytes[i * EXCEPTION_INFO_BYTE_LENGTH + 2] & 0xFF) << 8 | (exceptionTableBytes[i * EXCEPTION_INFO_BYTE_LENGTH + 3] & 0xFF));
+            exceptionInfoBean.setHandlerPc((exceptionTableBytes[i * EXCEPTION_INFO_BYTE_LENGTH + 4] & 0xFF) << 8 | (exceptionTableBytes[i * EXCEPTION_INFO_BYTE_LENGTH + 5] & 0xFF));
+            exceptionInfoBean.setCatchType((exceptionTableBytes[i * EXCEPTION_INFO_BYTE_LENGTH + 6] & 0xFF) << 8 | (exceptionTableBytes[i * EXCEPTION_INFO_BYTE_LENGTH + 7] & 0xFF));
             exceptionInfoBeanTable[i] = exceptionInfoBean;
         }
         return exceptionInfoBeanTable;
@@ -140,7 +139,7 @@ public class CodeAttributeBean extends AttributeInfoBean {
             this.catchType = catchType;
         }
 
-        public String toString(){
+        public String toString() {
             return "startPc: " + getStartPc() + "; endPc: " + getEndPc() + "; handlerPc: " + handlerPc + "; catchType: " + catchType;
         }
     }

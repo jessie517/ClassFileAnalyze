@@ -4,6 +4,9 @@ import com.analyze.basic.accessFlag.bean.MethodAccessBean;
 import com.analyze.attribute.bean.AttributeInfoBean;
 import com.analyze.constant.bean.ConstBean;
 
+import java.util.Map;
+import java.util.Set;
+
 /**
  * Created by chenjiaxu on 2017/10/27.
  */
@@ -11,7 +14,7 @@ public class MethodBean {
     private MethodAccessBean methodAccessBean;
     private int nameIndex;
     private int descriptorIndex;
-    private AttributeInfoBean[] attributeInfoBeans;
+    private Map<String, AttributeInfoBean> attributeInfoBeanMap;
 
     public MethodAccessBean getMethodAccessBean() {
         return methodAccessBean;
@@ -37,24 +40,24 @@ public class MethodBean {
         this.descriptorIndex = descriptorIndex;
     }
 
-    public AttributeInfoBean[] getAttributeInfoBeans() {
-        return attributeInfoBeans;
+    public Map<String, AttributeInfoBean> getAttributeInfoBeanMap() {
+        return attributeInfoBeanMap;
     }
 
-    public void setAttributeInfoBeans(AttributeInfoBean[] attributeInfoBeans) {
-        this.attributeInfoBeans = attributeInfoBeans;
+    public void setAttributeInfoBeanMap(Map<String, AttributeInfoBean> attributeInfoBeanMap) {
+        this.attributeInfoBeanMap = attributeInfoBeanMap;
     }
 
-    public String toString(ConstBean[] constBeans){
+    public String toString(ConstBean[] constBeans) {
         StringBuffer stringBuffer = new StringBuffer();
         stringBuffer.append(constBeans[nameIndex].getValue() + "\n");
         stringBuffer.append("\taccessFlag: " + methodAccessBean.toString() + "\n");
         stringBuffer.append("\tdescriptor: " + constBeans[descriptorIndex].getValue() + "\n");
         stringBuffer.append("\tattributes: " + "\n");
-        for (int i = 0; i < attributeInfoBeans.length; i++) {
-            stringBuffer.append("\t\t" + attributeInfoBeans[i].toString() + "\n");
+        Set<Map.Entry<String, AttributeInfoBean>> entries = attributeInfoBeanMap.entrySet();
+        for (Map.Entry<String, AttributeInfoBean> entry : entries) {
+            stringBuffer.append("\t\t" + entry.getKey() + ":" + entry.getValue() + "\n");
         }
-
         return stringBuffer.toString();
     }
 }

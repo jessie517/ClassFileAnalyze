@@ -4,7 +4,7 @@ package com.analyze.attribute.bean;
  * Created by chenjiaxu on 2017/10/29.
  * 用于泛型类型
  */
-public class SignatureAttributeBean extends AttributeInfoBean {
+public class SignatureAttributeBean implements AttributeInfoBean {
     private int signatureIndex;
 
     public SignatureAttributeBean(byte[] infoBytes) {

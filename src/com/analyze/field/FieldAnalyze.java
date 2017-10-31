@@ -1,7 +1,8 @@
 package com.analyze.field;
 
-import com.analyze.basic.accessFlag.FieldAccessFlagAnalyze;
 import com.analyze.attribute.AttributeAnalyze;
+import com.analyze.attribute.FieldAttributeAnalyze;
+import com.analyze.basic.accessFlag.FieldAccessFlagAnalyze;
 import com.analyze.constant.bean.ConstBean;
 import com.analyze.field.bean.FieldBean;
 import com.utils.UToNumeric;
@@ -21,7 +22,7 @@ public class FieldAnalyze {
         int fieldCount = UToNumeric.u2ToInt(u2);
 
         FieldBean[] fieldBeans = new FieldBean[fieldCount];
-        AttributeAnalyze attributeAnalyze = new AttributeAnalyze();
+        AttributeAnalyze attributeAnalyze = new FieldAttributeAnalyze();
         for (int i = 0; i < fieldCount; i++) {
             FieldBean fieldBean = new FieldBean();
 
@@ -34,7 +35,7 @@ public class FieldAnalyze {
             in.read(u2);
             fieldBean.setDescriptorIndex(UToNumeric.u2ToInt(u2));
 
-            fieldBean.setAttributeInfoBeans(attributeAnalyze.getAttributeInfoBeans(in, constBeans));
+            fieldBean.setAttributeInfoBeanMap(attributeAnalyze.getAttributeInfoBeans(in, constBeans));
 
             fieldBeans[i] = fieldBean;
         }
