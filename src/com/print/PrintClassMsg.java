@@ -24,7 +24,7 @@ public class PrintClassMsg {
 
         Set<Map.Entry<String, AttributeInfoBean>> entries = classAnalyze.getClassAttributes().entrySet();
         for (Map.Entry<String, AttributeInfoBean> entry : entries) {
-            classMsgBuffer.append("\t\t" + entry.getKey() + ":" + entry.getValue() + "\n");
+            classMsgBuffer.append("\t\t" + entry.getKey() + ":" + entry.getValue().toString(constBeans) + "\n");
         }
         classMsgBuffer.append("\n");
 

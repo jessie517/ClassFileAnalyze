@@ -1,5 +1,7 @@
 package com.analyze.attribute.bean;
 
+import com.analyze.constant.bean.ConstBean;
+
 /**
  * Created by chenjiaxu on 2017/10/28.
  */
@@ -16,15 +18,23 @@ public class LocalVariableTableAttributeBean implements AttributeInfoBean {
         LocalVariableInfo[] localVariableTable = new LocalVariableInfo[tableLegth];
         for (int i = 0; i < tableLegth; i++) {
             LocalVariableInfo localVariableInfo = new LocalVariableInfo();
-            localVariableInfo.setStartPc((infoBytes[currentIndex++] & 0xFF) << 8 | (infoBytes[currentIndex++] & 0xFF) );
-            localVariableInfo.setLength((infoBytes[currentIndex++] & 0xFF) << 8 | (infoBytes[currentIndex++] & 0xFF) );
-            localVariableInfo.setNameIndex((infoBytes[currentIndex++] & 0xFF) << 8 | (infoBytes[currentIndex++] & 0xFF) );
-            localVariableInfo.setDescriptorIndex((infoBytes[currentIndex++] & 0xFF) << 8 | (infoBytes[currentIndex++] & 0xFF) );
-            localVariableInfo.setIndex((infoBytes[currentIndex++] & 0xFF) << 8 | (infoBytes[currentIndex++] & 0xFF) );
+            localVariableInfo.setStartPc((infoBytes[currentIndex++] & 0xFF) << 8 | (infoBytes[currentIndex++] & 0xFF));
+            localVariableInfo.setLength((infoBytes[currentIndex++] & 0xFF) << 8 | (infoBytes[currentIndex++] & 0xFF));
+            localVariableInfo.setNameIndex((infoBytes[currentIndex++] & 0xFF) << 8 | (infoBytes[currentIndex++] & 0xFF));
+            localVariableInfo.setDescriptorIndex((infoBytes[currentIndex++] & 0xFF) << 8 | (infoBytes[currentIndex++] & 0xFF));
+            localVariableInfo.setIndex((infoBytes[currentIndex++] & 0xFF) << 8 | (infoBytes[currentIndex++] & 0xFF));
 
             localVariableTable[i] = localVariableInfo;
         }
         return localVariableTable;
+    }
+
+    public String toString(ConstBean[] constBeans) {
+        StringBuffer stringBuffer = new StringBuffer();
+        for (int i = 0; i < localVariableTable.length; i++) {
+            stringBuffer.append(localVariableTable[i].toString(constBeans) + "\n");
+        }
+        return stringBuffer.toString();
     }
 
     static class LocalVariableInfo {
@@ -72,6 +82,11 @@ public class LocalVariableTableAttributeBean implements AttributeInfoBean {
 
         public void setIndex(int index) {
             this.index = index;
+        }
+
+        public String toString(ConstBean[] constBeans) {
+            return "startPc: " + startPc + ", length: " + length + ", name: " + constBeans[nameIndex].getValue()
+                    + ", signature: " + constBeans[descriptorIndex].getValue() + ", index: " + index;
         }
     }
 }

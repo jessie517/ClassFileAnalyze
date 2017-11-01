@@ -1,6 +1,7 @@
 package com.analyze.attribute.bean;
 
 import com.analyze.attribute.AnnotationsAnalyze;
+import com.analyze.constant.bean.ConstBean;
 import com.utils.UToNumeric;
 
 import java.io.ByteArrayInputStream;
@@ -27,6 +28,13 @@ public class StackMapTableAttributeBean implements AttributeInfoBean {
 
     public void setEntries(StackMapFrame[] entries) {
         this.entries = entries;
+    }
+
+    public String toString(ConstBean[] constBeans) {
+        for(StackMapFrame stackMapFrame : entries){
+            //TODO
+        }
+        return "";
     }
 
     public static StackMapFrame[] getEntries(int numberOfEntries, InputStream in) throws Exception {

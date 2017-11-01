@@ -2,6 +2,7 @@ package com.analyze.attribute.bean.annotationBean;
 
 import com.analyze.attribute.AnnotationsAnalyze;
 import com.analyze.attribute.bean.AttributeInfoBean;
+import com.analyze.constant.bean.ConstBean;
 
 import java.io.ByteArrayInputStream;
 import java.util.Arrays;
@@ -14,6 +15,10 @@ public class AnnotationDefault implements AttributeInfoBean {
 
     public AnnotationDefault(byte[] infoBytes) throws Exception {
         this.defaultValue = new AnnotationsAnalyze().getElementValue(new ByteArrayInputStream(infoBytes));
+    }
+
+    public String toString(ConstBean[] constBeans){
+        return defaultValue.toString();
     }
 
     public ElementValue getDefaultValue() {

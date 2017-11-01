@@ -2,6 +2,7 @@ package com.analyze.attribute.bean.annotationBean;
 
 import com.analyze.attribute.AnnotationsAnalyze;
 import com.analyze.attribute.bean.AttributeInfoBean;
+import com.analyze.constant.bean.ConstBean;
 
 import java.io.ByteArrayInputStream;
 import java.util.Arrays;
@@ -17,6 +18,14 @@ public class RuntimeVisibleAnnotations implements AttributeInfoBean {
         int numAnnotations = (infoBytes[i++] & 0xFF) << 8 | (infoBytes[i++] & 0xFF);
         byte[] annotationBytes = Arrays.copyOfRange(infoBytes, i, infoBytes.length);
         this.annotations = new AnnotationsAnalyze().getAnnotations(numAnnotations, new ByteArrayInputStream(annotationBytes));
+    }
+
+    public String toString(ConstBean[] constBeans) {
+        StringBuffer stringBuffer = new StringBuffer();
+        for (int i = 0; i < annotations.length; i++) {
+            stringBuffer.append(annotations[i].toString(constBeans) + ", ");
+        }
+        return stringBuffer.toString();
     }
 
     public AnnotationBean[] getAnnotations() {

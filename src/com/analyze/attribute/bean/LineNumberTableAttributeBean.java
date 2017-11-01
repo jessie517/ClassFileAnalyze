@@ -1,5 +1,7 @@
 package com.analyze.attribute.bean;
 
+import com.analyze.constant.bean.ConstBean;
+
 import java.util.Arrays;
 
 /**
@@ -25,6 +27,14 @@ public class LineNumberTableAttributeBean implements AttributeInfoBean {
         return lineNumberInfoTable;
     }
 
+    public String toString(ConstBean[] constBeans) {
+        StringBuffer stringBuffer = new StringBuffer();
+        for (int i = 0; i < lineNumberInfoTable.length; i++) {
+            stringBuffer.append(lineNumberInfoTable[i].toString());
+        }
+        return stringBuffer.toString();
+    }
+
     static class LineNumberInfo {
         private int startPc;
         private int lineNumber;
@@ -43,6 +53,10 @@ public class LineNumberTableAttributeBean implements AttributeInfoBean {
 
         public void setLineNumber(int lineNumber) {
             this.lineNumber = lineNumber;
+        }
+
+        public String toString() {
+            return "startPc: " + startPc + ", lineNumber: " + lineNumber;
         }
     }
 }

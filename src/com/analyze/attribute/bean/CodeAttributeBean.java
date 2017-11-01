@@ -7,6 +7,7 @@ import com.code.CodeToString;
 import java.io.ByteArrayInputStream;
 import java.util.Arrays;
 import java.util.Map;
+import java.util.Set;
 
 /**
  * Created by chenjiaxu on 2017/10/28.
@@ -75,13 +76,19 @@ public class CodeAttributeBean implements AttributeInfoBean {
         this.attributeInfoBeanMap = attributeInfoBeanMap;
     }
 
-    public String toString() {
+    public String toString(ConstBean[] constBeans) {
         StringBuffer stringBuffer = new StringBuffer();
         byte[] code = this.getCode();
+        stringBuffer.append("maxStack: " + maxStack + ", maxLocals: " + maxLocals + "\n");
         stringBuffer.append("code: " + Arrays.toString(CodeToString.codesToString(code)) + "\n");
         stringBuffer.append("exceptionTable: " + "\n");
         for (int i = 0; i < exceptionTable.length; i++) {
             stringBuffer.append("\t" + exceptionTable[i].toString() + "\n");
+        }
+        stringBuffer.append("attributes: " + "\n");
+        Set<Map.Entry<String, AttributeInfoBean>> entries = attributeInfoBeanMap.entrySet();
+        for (Map.Entry<String, AttributeInfoBean> entry : entries) {
+            stringBuffer.append("\t" + entry.getKey() + ":" + entry.getValue().toString(constBeans) + "\n");
         }
 
         return stringBuffer.toString();

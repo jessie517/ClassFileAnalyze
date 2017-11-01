@@ -1,6 +1,7 @@
 package com.analyze.attribute.bean;
 
 import com.analyze.basic.accessFlag.bean.InnerClassAccessBean;
+import com.analyze.constant.bean.ConstBean;
 
 /**
  * Created by chenjiaxu on 2017/10/28.
@@ -13,14 +14,22 @@ public class InnerClassesAttributeBean implements AttributeInfoBean {
         getInnerClassesInfoTable(infoBytes, tableLength, 2);
     }
 
+    public String toString(ConstBean[] constBeans) {
+        StringBuffer stringBuffer = new StringBuffer();
+        for (int i = 0; i < innerClassesInfoTable.length; i++) {
+            stringBuffer.append(innerClassesInfoTable[i].toString(constBeans) + "\n");
+        }
+        return stringBuffer.substring(0, stringBuffer.length() - 2);
+    }
+
     public static InnerClassesInfo[] getInnerClassesInfoTable(byte[] infoBytes, int tableLegth, int currentIndex) {
         InnerClassesInfo[] innerClassesInfoTable = new InnerClassesInfo[tableLegth];
         for (int i = 0; i < tableLegth; i++) {
             InnerClassesInfo innerClassesInfo = new InnerClassesInfo();
-            innerClassesInfo.setInnerClassInfoIndex((infoBytes[currentIndex++] & 0xFF)  << 8 | (infoBytes[currentIndex++] & 0xFF) );
-            innerClassesInfo.setOuterClassInfoIndex((infoBytes[currentIndex++] & 0xFF)  << 8 | (infoBytes[currentIndex++] & 0xFF) );
-            innerClassesInfo.setInnerNameIndex((infoBytes[currentIndex++] & 0xFF)  << 8 | (infoBytes[currentIndex++] & 0xFF) );
-            innerClassesInfo.setInnerClassAccessBean(new InnerClassAccessBean((infoBytes[currentIndex++] & 0xFF)  << 8 | (infoBytes[currentIndex++] & 0xFF) ));
+            innerClassesInfo.setInnerClassInfoIndex((infoBytes[currentIndex++] & 0xFF) << 8 | (infoBytes[currentIndex++] & 0xFF));
+            innerClassesInfo.setOuterClassInfoIndex((infoBytes[currentIndex++] & 0xFF) << 8 | (infoBytes[currentIndex++] & 0xFF));
+            innerClassesInfo.setInnerNameIndex((infoBytes[currentIndex++] & 0xFF) << 8 | (infoBytes[currentIndex++] & 0xFF));
+            innerClassesInfo.setInnerClassAccessBean(new InnerClassAccessBean((infoBytes[currentIndex++] & 0xFF) << 8 | (infoBytes[currentIndex++] & 0xFF)));
 
             innerClassesInfoTable[i] = innerClassesInfo;
         }
@@ -63,6 +72,11 @@ public class InnerClassesAttributeBean implements AttributeInfoBean {
 
         public void setInnerClassAccessBean(InnerClassAccessBean innerClassAccessBean) {
             this.innerClassAccessBean = innerClassAccessBean;
+        }
+
+        public String toString(ConstBean[] constBeans) {
+            return "accessFlag: " + innerClassAccessBean.toString() + ", innerClassInfo: " + constBeans[innerClassInfoIndex].getValue()
+                    + ", outerClassInfo: " + constBeans[outerClassInfoIndex].getValue() + ", innerName: " + constBeans[innerNameIndex].getValue();
         }
     }
 

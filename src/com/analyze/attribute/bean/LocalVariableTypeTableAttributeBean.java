@@ -1,5 +1,7 @@
 package com.analyze.attribute.bean;
 
+import com.analyze.constant.bean.ConstBean;
+
 /**
  * Created by chenjiaxu on 2017/10/28.
  */
@@ -25,6 +27,14 @@ public class LocalVariableTypeTableAttributeBean implements AttributeInfoBean {
             localVariableTable[i] = localVariableTypeInfo;
         }
         return localVariableTable;
+    }
+
+    public String toString(ConstBean[] constBeans) {
+        StringBuffer stringBuffer = new StringBuffer();
+        for (int i = 0; i < localVariableTypeTable.length; i++) {
+            stringBuffer.append(localVariableTypeTable[i].toString(constBeans) + "\n");
+        }
+        return stringBuffer.toString();
     }
 
     static class LocalVariableTypeInfo {
@@ -72,6 +82,11 @@ public class LocalVariableTypeTableAttributeBean implements AttributeInfoBean {
 
         public void setIndex(int index) {
             this.index = index;
+        }
+
+        public String toString(ConstBean[] constBeans) {
+            return "startPc: " + startPc + ", length: " + length + ", name: " + constBeans[nameIndex].getValue()
+                    + ", signature: " + constBeans[signatureIndex].getValue() + ", index: " + index;
         }
     }
 }

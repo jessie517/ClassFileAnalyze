@@ -1,5 +1,7 @@
 package com.analyze.attribute.bean;
 
+import com.analyze.constant.bean.ConstBean;
+
 /**
  * Created by chenjiaxu on 2017/10/28.
  */
@@ -16,5 +18,9 @@ public class SourceFileAttributeBean implements AttributeInfoBean {
 
     public void setSourceFileIndex(int sourceFileIndex) {
         this.sourceFileIndex = sourceFileIndex;
+    }
+
+    public String toString(ConstBean[] constBeans) {
+        return constBeans[sourceFileIndex].getValue().toString();
     }
 }

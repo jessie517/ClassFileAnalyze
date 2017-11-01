@@ -1,5 +1,7 @@
 package com.analyze.attribute.bean.annotationBean;
 
+import com.analyze.constant.bean.ConstBean;
+
 /**
  * Created by chenjiaxu on 2017/11/1.
  */
@@ -7,6 +9,15 @@ public class AnnotationBean {
     private int typeIndex;
     private ElementValuePair[] elementValuePairs;
 
+    public String toString(ConstBean[] constBeans){
+        StringBuffer stringBuffer = new StringBuffer();
+        stringBuffer.append(constBeans[typeIndex].getValue());
+        for(int i=0; i < elementValuePairs.length; i++){
+            //TODO
+            System.out.println("待解析");
+        }
+        return stringBuffer.toString();
+    }
     public int getTypeIndex() {
         return typeIndex;
     }

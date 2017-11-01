@@ -1,5 +1,7 @@
 package com.analyze.attribute.bean;
 
+import com.analyze.constant.bean.ConstBean;
+
 /**
  * Created by chenjiaxu on 2017/10/29.
  * 用于泛型类型
@@ -17,5 +19,9 @@ public class SignatureAttributeBean implements AttributeInfoBean {
 
     public void setSignatureIndex(int signatureIndex) {
         this.signatureIndex = signatureIndex;
+    }
+
+    public String toString(ConstBean[] constBeans) {
+        return constBeans[signatureIndex].getValue().toString();
     }
 }

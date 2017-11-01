@@ -20,7 +20,6 @@ public class InnerClassAccessBean {
     private boolean isProtected;
     private boolean isStatic;
     private boolean isFinal;
-    private boolean isSuper;
 
     private boolean isInterface;
     private boolean isAbstract;
@@ -62,6 +61,35 @@ public class InnerClassAccessBean {
         }
     }
 
+    @Override
+    public String toString() {
+        StringBuffer stringBuffer = new StringBuffer();
+        if (isPublic()) {
+            stringBuffer.append("public ");
+        } else if (isPrivate()){
+            stringBuffer.append("private ");
+        } else if (isProtected()){
+            stringBuffer.append("protected ");
+        }
+        if(isStatic()){
+            stringBuffer.append("static ");
+        }
+        if (isFinal()) {
+            stringBuffer.append("final ");
+        }
+        if (isAnnotation()) {
+            stringBuffer.append("annotation ");
+        } else if (isInterface()) {
+            stringBuffer.append("interface ");
+        } else if (isEnum()) {
+            stringBuffer.append("enum ");
+        } else {
+            stringBuffer.append("class ");
+        }
+
+        return stringBuffer.toString();
+    }
+
     public InnerClassAccessBean(byte[] b) {
         this((b[0] & 0xFF) << 8 | (b[1] & 0xFF));
     }
@@ -84,10 +112,6 @@ public class InnerClassAccessBean {
 
     public boolean isFinal() {
         return isFinal;
-    }
-
-    public boolean isSuper() {
-        return isSuper;
     }
 
     public boolean isInterface() {

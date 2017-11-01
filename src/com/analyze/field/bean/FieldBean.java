@@ -56,7 +56,7 @@ public class FieldBean {
         stringBuffer.append("\tattributes: " + "\n");
         Set<Map.Entry<String, AttributeInfoBean>> entries = attributeInfoBeanMap.entrySet();
         for (Map.Entry<String, AttributeInfoBean> entry : entries) {
-            stringBuffer.append("\t\t" + entry.getKey() + ":" + entry.getValue() + "\n");
+            stringBuffer.append("\t\t" + entry.getKey() + ":" + entry.getValue().toString(constBeans) + "\n");
         }
 
         return stringBuffer.toString();
