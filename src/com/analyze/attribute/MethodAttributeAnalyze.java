@@ -1,6 +1,7 @@
 package com.analyze.attribute;
 
 import com.analyze.attribute.bean.*;
+import com.analyze.attribute.bean.annotationBean.*;
 import com.analyze.constant.bean.ConstBean;
 import com.utils.UToNumeric;
 
@@ -20,15 +21,15 @@ public class MethodAttributeAnalyze extends AttributeAnalyze {
         } else if ("Exceptions".equals(attributeName)) {
             return new ExceptionAttributeBean(infoBytes);
         } else if ("RuntimeVisibleParameterAnnotations".equals(attributeName)) {
-
+            return new RuntimeVisibleParameterAnnotations(infoBytes);
         } else if ("RuntimeInvisibleParameterAnnotations".equals(attributeName)) {
-
+            return new RuntimeInvisibleParameterAnnotations(infoBytes);
         } else if ("AnnotationDefault".equals(attributeName)) {
-
+            return new AnnotationDefault(infoBytes);
         } else if ("RuntimeVisibleAnnotations".equals(attributeName)) {
-
+            return new RuntimeVisibleAnnotations(infoBytes);
         } else if ("RuntimeInvisibleAnnotations".equals(attributeName)) {
-
+            return new RuntimeInvisibleAnnotations(infoBytes);
         } else if ("Signature".equals(attributeName)) {
             return new SignatureAttributeBean(infoBytes);
         } else if ("Deprecated".equals(attributeName)) {

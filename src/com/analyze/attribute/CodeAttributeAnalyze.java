@@ -22,7 +22,7 @@ public class CodeAttributeAnalyze extends AttributeAnalyze {
         } else if ("LocalVariableTypeTable".equals(attributeName)) {
             return new LocalVariableTypeTableAttributeBean(infoBytes);
         } else if ("StackMapTable".equals(attributeName)) {
-
+            return new StackMapTableAttributeBean(infoBytes);
         } else {
             System.out.println(attributeName);
         }

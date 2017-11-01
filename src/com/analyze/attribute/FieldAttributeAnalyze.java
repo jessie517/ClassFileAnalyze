@@ -1,6 +1,8 @@
 package com.analyze.attribute;
 
 import com.analyze.attribute.bean.*;
+import com.analyze.attribute.bean.annotationBean.RuntimeInvisibleAnnotations;
+import com.analyze.attribute.bean.annotationBean.RuntimeVisibleAnnotations;
 import com.analyze.constant.bean.ConstBean;
 import com.utils.UToNumeric;
 
@@ -16,9 +18,9 @@ public class FieldAttributeAnalyze extends AttributeAnalyze {
     @Override
     public AttributeInfoBean getAttributeBean(String attributeName, byte[] infoBytes, ConstBean[] constBeans) throws Exception {
         if ("RuntimeVisibleAnnotations".equals(attributeName)) {
-
+            return new RuntimeVisibleAnnotations(infoBytes);
         } else if ("RuntimeInvisibleAnnotations".equals(attributeName)) {
-
+            return new RuntimeInvisibleAnnotations(infoBytes);
         } else if ("Signature".equals(attributeName)) {
             return new SignatureAttributeBean(infoBytes);
         } else if ("SourceFile".equals(attributeName)) {
