@@ -1,5 +1,5 @@
 import com.analyze.ClassAnalyze;
-import com.print.PrintClassMsg;
+import com.print.*;
 
 import java.io.IOException;
 
@@ -10,7 +10,7 @@ public class ProjectRun {
     public static void main(String[] args) {
         try {
             ClassAnalyze classAnalyze = new ClassAnalyze("C:\\Users\\chenjiaxu\\Desktop\\QueryService.class");
-            PrintClassMsg.print(classAnalyze);
+            PrintMsg.print(classAnalyze);
         } catch (Exception e) {
             e.printStackTrace();
         }

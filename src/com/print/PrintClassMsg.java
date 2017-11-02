@@ -11,6 +11,7 @@ import java.util.Set;
 
 /**
  * Created by chenjiaxu on 2017/10/29.
+ * 输出class基本信息
  */
 public class PrintClassMsg {
     public static void print(ClassAnalyze classAnalyze) {
@@ -24,22 +25,9 @@ public class PrintClassMsg {
 
         Set<Map.Entry<String, AttributeInfoBean>> entries = classAnalyze.getClassAttributes().entrySet();
         for (Map.Entry<String, AttributeInfoBean> entry : entries) {
-            classMsgBuffer.append("\t\t" + entry.getKey() + ":" + entry.getValue().toString(constBeans) + "\n");
-        }
-        classMsgBuffer.append("\n");
-
-        FieldBean[] fieldBeans = classAnalyze.getFieldBeans();
-        classMsgBuffer.append("fieldBeans: " + "\n");
-        for (int i = 0; i < fieldBeans.length; i++) {
-            classMsgBuffer.append("\t" + fieldBeans[i].toString(constBeans) + "\n");
+            classMsgBuffer.append("\t" + entry.getKey() + ":" + entry.getValue().toString(constBeans) + "\n");
         }
 
-        MethodBean[] methodBeans = classAnalyze.getMethodBeans();
-        classMsgBuffer.append("methodBeans: " + "\n");
-        for (int i = 0; i < methodBeans.length; i++) {
-            classMsgBuffer.append("\t" + methodBeans[i].toString(constBeans) + "\n");
-        }
-
-        System.out.println(classMsgBuffer.toString());
+        System.out.println(classMsgBuffer);
     }
 }

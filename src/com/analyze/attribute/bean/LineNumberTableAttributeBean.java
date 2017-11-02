@@ -30,7 +30,7 @@ public class LineNumberTableAttributeBean implements AttributeInfoBean {
     public String toString(ConstBean[] constBeans) {
         StringBuffer stringBuffer = new StringBuffer();
         for (int i = 0; i < lineNumberInfoTable.length; i++) {
-            stringBuffer.append(lineNumberInfoTable[i].toString());
+            stringBuffer.append(lineNumberInfoTable[i].toString() + "; ");
         }
         return stringBuffer.toString();
     }
